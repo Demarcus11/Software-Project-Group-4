@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Management System</title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Output CSS file -->
+    <link rel="stylesheet" href="./output.css">
+</head>
+
+<body>
+    <div class="project">
+        <aside class="project__sidebar | p-4">
+            <h2 class="project__sidebar-title | text-2xl">Team Members</h2>
+
+            <ul class="project__sidebar-members | mt-4 grid gap-4">
+                <li class="project__sidebar-members-item flex items-center justify-between p-2 rounded">
+                    <input class="b-0 bg-transparent w-1/2 outline-0" type="text" value="Member 1" disabled>
+                    <div class="flex items-center gap-4">
+                        <i class="cursor-pointer fa-solid fa-pen-to-square"></i>
+                        <i class="cursor-pointer fa-solid fa-x"></i>
+                    </div>
+                </li>
+
+                <li class="project__sidebar-members-item flex items-center justify-between p-2 rounded">
+                    <input class="b-0 bg-transparent w-1/2 outline-0" type="text" value="Member 2" disabled>
+                    <div class="flex items-center gap-4">
+                        <i class="cursor-pointer fa-solid fa-pen-to-square"></i>
+                        <i class="cursor-pointer fa-solid fa-x"></i>
+                    </div>
+                </li>
+
+
+                <li class="project__sidebar-members-item flex items-center justify-between p-2 rounded">
+                    <input class="b-0 bg-transparent w-1/2 outline-0" type="text" value="Member 3" disabled>
+                    <div class="flex items-center gap-4">
+                        <i class="cursor-pointer fa-solid fa-pen-to-square"></i>
+                        <i class="cursor-pointer fa-solid fa-x"></i>
+                    </div>
+                </li>
+
+
+                <li class="project__sidebar-members-item flex items-center justify-between p-2 rounded">
+                    <input class="b-0 bg-transparent w-1/2 outline-0" type="text" value="Member 4" disabled>
+                    <div class="flex items-center gap-4">
+                        <i class="cursor-pointer fa-solid fa-pen-to-square"></i>
+                        <i class="cursor-pointer fa-solid fa-x"></i>
+                    </div>
+                </li>
+
+            </ul>
+            <form action="">
+                <input class="hidden" type="text" placeholder="Enter name...">
+                <button class="project__sidebar-members-submit | w-full mt-4 py-[0.5rem]" type="submit">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </form>
+        </aside>
+
+        <div class="project__content | pt-4 overflow-auto h-screen pb-20">
+            <header class="project__section project__header | rounded-2xl p-4">
+                <form class="project__header-form | grid gap-4" action="">
+                    <div class="flex items-center">
+                        <input class="project__input project__main-title | border-0 outline-0 text-2xl font-bold"
+                            type="text" placeholder="Enter Project Title..." value="Software Project Title" />
+                        <div class="flex items-center gap-4">
+                            <i class="cursor-pointer fa-solid fa-pen-to-square"></i>
+                            <i class="cursor-pointer fa-solid fa-x"></i>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <label for="project__owner-name">Project Manager:</label>
+                            <input class="project__input project__owner-name | border-0 outline-0 w-[10%]" type="text"
+                                placeholder="Enter name..." value="John Doe">
+                            <div class="flex items-center gap-4">
+                                <i class="cursor-pointer fa-solid fa-pen-to-square"></i>
+                                <i class="cursor-pointer fa-solid fa-x"></i>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </header>
+
+
+
+            <main class="project__main">
+                <div class="project__section | rounded-2xl p-4 mt-4">
+                    <h2 class="project__main-subtitle | text-xl font-semibold">Project Risks</h2>
+
+                    <ul class="grid gap-4 mt-4">
+                        <li class="project__section-card">
+                            <div class="flex justify-between items-center">
+                                <span class="project__section-card-status | text-sm text-red-600"
+                                    data-status="high">High</span>
+                                <div class="flex items-center gap-4">
+                                    <i class="cursor-pointer fa-solid fa-pen-to-square"></i>
+                                    <i class="cursor-pointer fa-solid fa-x"></i>
+                                </div>
+                            </div>
+                            <p class="project__section-card-title | text-lg font-medium">Scope Creep</p>
+                            <p class="project__section-card-text">Lorem ipsum, dolor sit amet consectetur adipisicing
+                                elit. Nihil, ullam odit? Placeat alias eius repellendus mollitia nisi. Nisi illum
+                                nesciunt debitis voluptatum similique ullam quia. Ipsa, voluptas cumque? Mollitia
+                                adipisci corrupti eaque in veniam sapiente facilis sed eum architecto voluptate?</p>
+                        </li>
+
+                        <li class="project__section-card">
+                            <div class="flex justify-between items-center">
+                                <span class="project__section-card-status | text-sm text-yellow-600"
+                                    data-status="moderate">Moderate</span>
+                                <div class="flex items-center gap-4">
+                                    <i class="cursor-pointer fa-solid fa-pen-to-square"></i>
+                                    <i class="cursor-pointer fa-solid fa-x"></i>
+                                </div>
+                            </div>
+                            <p class="project__section-card-title | text-lg font-medium">Technical Complexity</p>
+                            <p class="project__section-card-text">Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. Repellat impedit odio recusandae? Facere, rem consequatur ducimus quasi iusto sunt
+                                dignissimos aperiam obcaecati nobis ullam fugit aliquid harum cum assumenda voluptates
+                                voluptatibus. Natus ratione obcaecati amet, a labore aliquid architecto temporibus.</p>
+                        </li>
+
+                        <li class="project__section-card">
+                            <div class="flex justify-between items-center">
+                                <span class="project__section-card-status | text-sm text-green-600"
+                                    data-status="low">Low</span>
+                                <div class="flex items-center gap-4">
+                                    <i class="cursor-pointer fa-solid fa-pen-to-square"></i>
+                                    <i class="cursor-pointer fa-solid fa-x"></i>
+                                </div>
+                            </div>
+                            <p class="project__section-card-title | text-lg font-medium">Resource Constraints</p>
+                            <p class="project__section-card-text">Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. Perferendis magnam quae deserunt aperiam? Doloribus in corporis pariatur mollitia
+                                magni, iusto aliquam laboriosam nostrum fuga soluta provident debitis ratione, nihil
+                                veritatis expedita numquam tempora explicabo? Atque illo esse temporibus doloremque
+                                cupiditate.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="project__section | rounded-2xl p-4 mt-4">
+                    <h2 class="project__main-subtitle | text-xl font-semibold">Functional Requirements</h2>
+
+                    <ul class="grid gap-4 mt-4">
+                        <li class="project__section-card">
+                            <div class="flex justify-between items-center">
+                                <p class="project__section-card-title | text-lg font-medium">Real-time Collaboration</p>
+                                <div class="flex items-center gap-4">
+                                    <i class="cursor-pointer fa-solid fa-pen-to-square"></i>
+                                    <i class="cursor-pointer fa-solid fa-x"></i>
+                                </div>
+                            </div>
+                            <p class="project__section-card-text">Lorem ipsum, dolor sit amet consectetur adipisicing
+                                elit. Nihil, ullam odit? Placeat alias eius repellendus mollitia nisi. Nisi illum
+                                nesciunt debitis voluptatum similique ullam quia. Ipsa, voluptas cumque? Mollitia
+                                adipisci corrupti eaque in veniam sapiente facilis sed eum architecto voluptate?</p>
+                        </li>
+
+                        <li class="project__section-card">
+                            <div class="flex justify-between items-center">
+                                <p class="project__section-card-title | text-lg font-medium">Requirement Categorization
+                                </p>
+                                <div class="flex items-center gap-4">
+                                    <i class="cursor-pointer fa-solid fa-pen-to-square"></i>
+                                    <i class="cursor-pointer fa-solid fa-x"></i>
+                                </div>
+                            </div>
+                            <p class="project__section-card-text">Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. Repellat impedit odio recusandae? Facere, rem consequatur ducimus quasi iusto sunt
+                                dignissimos aperiam obcaecati nobis ullam fugit aliquid harum cum assumenda voluptates
+                                voluptatibus. Natus ratione obcaecati amet, a labore aliquid architecto temporibus.</p>
+                        </li>
+
+                        <li class="project__section-card">
+                            <div class="flex justify-between items-center">
+                                <p class="project__section-card-title | text-lg font-medium">Requirement Management
+                                    Interface</p>
+                                <div class="flex items-center gap-4">
+                                    <i class="cursor-pointer fa-solid fa-pen-to-square"></i>
+                                    <i class="cursor-pointer fa-solid fa-x"></i>
+                                </div>
+                            </div>
+                            <p class="project__section-card-text">Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. Perferendis magnam quae deserunt aperiam? Doloribus in corporis pariatur mollitia
+                                magni, iusto aliquam laboriosam nostrum fuga soluta provident debitis ratione, nihil
+                                veritatis expedita numquam tempora explicabo? Atque illo esse temporibus doloremque
+                                cupiditate.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="project__section | rounded-2xl p-4 mt-4">
+                    <h2 class="project__main-subtitle | text-xl font-semibold">Non-functional Requirements</h2>
+
+                    <ul class="grid gap-4 mt-4">
+                        <li class="project__section-card">
+                            <div class="flex justify-between items-center">
+                                <p class="project__section-card-title | text-lg font-medium">Scalability</p>
+                                <div class="flex items-center gap-4">
+                                    <i class="cursor-pointer fa-solid fa-pen-to-square"></i>
+                                    <i class="cursor-pointer fa-solid fa-x"></i>
+                                </div>
+                            </div>
+                            <p class="project__section-card-text">Lorem ipsum, dolor sit amet consectetur adipisicing
+                                elit. Nihil, ullam odit? Placeat alias eius repellendus mollitia nisi. Nisi illum
+                                nesciunt debitis voluptatum similique ullam quia. Ipsa, voluptas cumque? Mollitia
+                                adipisci corrupti eaque in veniam sapiente facilis sed eum architecto voluptate?</p>
+                        </li>
+
+                        <li class="project__section-card">
+                            <div class="flex justify-between items-center">
+                                <p class="project__section-card-title | text-lg font-medium">Security</p>
+                                <div class="flex items-center gap-4">
+                                    <i class="cursor-pointer fa-solid fa-pen-to-square"></i>
+                                    <i class="cursor-pointer fa-solid fa-x"></i>
+                                </div>
+                            </div>
+                            <p class="project__section-card-text">Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. Repellat impedit odio recusandae? Facere, rem consequatur ducimus quasi iusto sunt
+                                dignissimos aperiam obcaecati nobis ullam fugit aliquid harum cum assumenda voluptates
+                                voluptatibus. Natus ratione obcaecati amet, a labore aliquid architecto temporibus.</p>
+                        </li>
+
+                        <li class="project__section-card">
+                            <div class="flex justify-between items-center">
+                                <p class="project__section-card-title | text-lg font-medium">Performance</p>
+                                <div class="flex items-center gap-4">
+                                    <i class="cursor-pointer fa-solid fa-pen-to-square"></i>
+                                    <i class="cursor-pointer fa-solid fa-x"></i>
+                                </div>
+                            </div>
+                            <p class="project__section-card-text">Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. Perferendis magnam quae deserunt aperiam? Doloribus in corporis pariatur mollitia
+                                magni, iusto aliquam laboriosam nostrum fuga soluta provident debitis ratione, nihil
+                                veritatis expedita numquam tempora explicabo? Atque illo esse temporibus doloremque
+                                cupiditate.</p>
+                        </li>
+                    </ul>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>
