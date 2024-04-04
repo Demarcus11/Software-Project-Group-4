@@ -15,7 +15,7 @@
 
 <body>
     <div class="project">
-        <aside class="project__sidebar | p-4">
+        <aside class="project__sidebar | p-4 relative">
             <h2 class="project__sidebar-title | text-2xl">Team Members</h2>
 
             <ul class="project__sidebar-members | mt-4 grid gap-4">
@@ -60,6 +60,10 @@
                     <i class="fa-solid fa-plus"></i>
                 </button>
             </form>
+
+
+            <!-- Log out icon -->
+            <button class="log-out | absolute bottom-4 right-4 bg-red-500">Log Out</button>
         </aside>
 
         <div class="project__content | pt-4 overflow-auto h-screen pb-20">
@@ -68,10 +72,6 @@
                     <div class="flex items-center">
                         <input class="project__input project__main-title | border-0 outline-0 text-2xl font-bold"
                             type="text" placeholder="Enter Project Title..." value="Software Project Title" />
-                        <div class="flex items-center gap-4">
-                            <i class="cursor-pointer fa-solid fa-pen-to-square"></i>
-                            <i class="cursor-pointer fa-solid fa-x"></i>
-                        </div>
                     </div>
 
                     <div>
