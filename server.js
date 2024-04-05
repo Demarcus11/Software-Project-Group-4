@@ -6,6 +6,7 @@ import { errorHandlerMiddleware } from "./middleware/ErrorHandler.js";
 import { router as authRouter } from "./routes/auth.js";
 import { router as dashboardRouter } from "./routes/dashboard.js";
 import { connectDB } from "./db/Connect.js";
+import { auth as authenticateUser } from "./middleware/Authentication.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -23,7 +24,7 @@ server.use(express.static(path.join(__dirname, "public")));
 
 // Root routes
 server.use("/api/v1/auth", authRouter);
-server.use("/api/v1/dashboard", dashboardRouter);
+server.use("/api/v1/dashboard", authenticateUser, dashboardRouter);
 
 server.use(notFoundMiddleware);
 server.use(errorHandlerMiddleware);
