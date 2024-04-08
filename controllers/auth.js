@@ -15,5 +15,18 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  res.send("Login User");
+  const { username, password } = req.body;
+
+  if (!username || !password) throw new BadRequestError("Please provide a username and password");
+
+  const user = await User.findOne({ username });
+
+  if (!user) throw new UnauthenticatedError("Invalid Credentials");
+
+  const isPasswordCorrect = await user.comparePassword(password);
+
+  if (!isPasswordCorrect) throw new UnauthenticatedError("Invalid Credentials");
+
+  const token = user.createJWT(); // Remember the JWT token will be generated as the same token if the user's name matches, if they register as "bob" and the JWT is generated as "b1b", if "bob" logins in, when we create a new token with "bob" it will be generated as "b1b"
+  res.status(StatusCodes.OK).json({ user: { username: user.username }, token });
 };

@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --main-bg: #edeef3;
+  --main-text: rgb(51 65 85);
+  --clr-primary-400: hsla(300, 100%, 25%, 1);
+  --clr-primary-400-hsl: 300, 100%, 25%;
+  --clr-nuetral-100: hsla(0, 100%, 100%, 0.95);
+  --ff-primary: "Poppins", sans-serif;
+}
+
+/* CSS Reset */
+
+/* makes sure padding and borders are calculated in the size of an element */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* remove default spacing and force children to inherit the font of their parents by default */
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+/* adds hanging punctuation when its the first or last character in text, currently not supported in Chrome as of 2024 */
+
+html {
+  hanging-punctuation: first last;
+}
+
+/* body should take at least the full height of the viewport */
+
+body {
+  min-height: 100svh;
+  /* svh assumes theres a address bar open on mobile and prevents layout shift when it disappears */
+}
+
+/* responsive images/videos */
+
+img,
+video,
+svg,
+picture {
+  display: block;
+  /* images/videos should be on their own line */
+  max-width: 100%;
+  /* width of images and videos should be at most be 100% of their container */
+}
+
+/* Make long headings display evenly across multiple lines by default */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+/* Gets rid of text orphans and limits text line length by default */
+
+p {
+  max-inline-size: 75ch;
+  /* similar to max-width except its a logical property, so it can adjust to different writing mode directions */
+  text-wrap: pretty;
+}
+
+/* eliminates scroll snap behavior when the user prefers reduced motion and adds some space above the section being scrolled to  */
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 3rem;
+    /* personal peference on how much space (usually 3-5 rem) */
+  }
+}
+
+/* General Styles */
+
+body {
+  font-family: var(--ff-primary);
+  background-color: var(--main-bg);
+  color: var(--main-text);
+  min-height: 100vh;
+}
+
+.login {
+  display: grid;
+  place-content: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  margin-top: 10rem;
+  width: min(100% - 3rem, 70rem);
+  margin-inline: auto;
+}
+
+form {
+  max-width: 30rem;
+}
+
+.login__img {
+  scale: 2.2;
+  pointer-events: none;
+  margin-top: 5rem;
+}
+
+.login__btn {
+  background-color: hsl(var(--clr-primary-400-hsl), 0.5);
+  color: var(--clr-nuetral-100);
+  border-radius: 100vmax;
+  padding: 0.65rem;
+}
+
+.login__cac {
+  text-decoration: underline;
+}

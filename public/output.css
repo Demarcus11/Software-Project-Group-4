@@ -824,6 +824,14 @@ ul {
   background-color: var(--clr-nuetral-100);
 }
 
+.project__sidebar-members-item {
+  display: flex;
+  align-items: center;
+  border-radius: 0.25rem;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+
 .project__sidebar-members-item:hover {
   background-color: hsla(0, 100%, 100%, 0.2);
 }
