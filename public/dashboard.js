@@ -6,11 +6,15 @@ const projectFunctionReqsDOM = document.querySelector(".project__project-functio
 const projectNonFunctionReqsDOM = document.querySelector(".project__project-non-functional-reqs");
 const userDOM = document.querySelector(".project__user");
 
+const API_BASE_ROUTE = "/api/v1";
+
 const username = localStorage.getItem("username") || "";
+let dashboardId = "";
 
 userDOM.textContent = username;
 
 const fetchProjectRisks = (data) => {
+  projectManagerDOM.innerHTML = "";
   for (const item of data.dashboards[0].projectRisks) {
     const projectRiskListElement = document.createElement("li");
     projectRiskListElement.classList.add("project__section-card");
@@ -32,6 +36,7 @@ const fetchProjectRisks = (data) => {
 };
 
 const fetchFunctionalReqs = (data) => {
+  projectFunctionReqsDOM.innerHTML = "";
   for (const item of data.dashboards[0].functionalRequirements) {
     const projectFunctionReqsListElement = document.createElement("li");
     projectFunctionReqsListElement.classList.add("project__section-card");
@@ -51,6 +56,7 @@ const fetchFunctionalReqs = (data) => {
 };
 
 const fetchNonFunctionalReqs = (data) => {
+  projectNonFunctionReqsDOM.innerHTML = "";
   for (const item of data.dashboards[0].nonFunctionalRequirements) {
     const nonFunctionalReqsListElement = document.createElement("li");
     nonFunctionalReqsListElement.classList.add("project__section-card");
@@ -70,8 +76,8 @@ const fetchNonFunctionalReqs = (data) => {
 };
 
 const fetchTeamMembers = (data) => {
+  projectTeamMembersDOM.innerHTML = "";
   for (const item of data.dashboards[0].teamMembers) {
-    console.log(item);
     const teamMembersListElement = document.createElement("li");
     teamMembersListElement.classList.add("project__sidebar-members-item");
     teamMembersListElement.innerHTML = [
@@ -91,13 +97,13 @@ const fetchDashboardData = async () => {
   const token = localStorage.getItem("token");
 
   try {
-    const { data } = await axios.get("/api/v1/dashboard", {
+    const { data } = await axios.get(`${API_BASE_ROUTE}/dashboard`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
 
-    console.log(data);
+    dashboardId = data.dashboards[0]._id;
 
     projectTitleDOM.value = data.dashboards[0].title;
     fetchProjectRisks(data);
@@ -109,4 +115,28 @@ const fetchDashboardData = async () => {
   }
 };
 
-fetchDashboardData();
+await fetchDashboardData();
+
+// Event Listeners
+
+// Update Title - CRUD
+projectTitleDOM.addEventListener("change", async () => {
+  const token = localStorage.getItem("token");
+
+  try {
+    await axios.patch(
+      `${API_BASE_ROUTE}/dashboard/${dashboardId}/title`,
+      {
+        title: projectTitleDOM.value,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    await fetchDashboardData();
+  } catch (error) {
+    console.log(error.response);
+  }
+});
