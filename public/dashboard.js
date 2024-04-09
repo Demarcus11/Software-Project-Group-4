@@ -1,142 +1,192 @@
-const projectTeamMembersDOM = document.querySelector(".project__sidebar-members");
+import { fetchProjectRisks } from "./project-risks.js";
+import { fetchFunctionalReqs } from "./functional-reqs.js";
+import { fetchNonFunctionalReqs } from "./non-functional-reqs.js";
+import { fetchTeamMembers } from "./team-members.js";
+
 const projectTitleDOM = document.querySelector(".project__main-title");
 const projectManagerDOM = document.querySelector(".project__owner-name");
-const projectRisksDOM = document.querySelector(".project__project-risks");
-const projectFunctionReqsDOM = document.querySelector(".project__project-functional-reqs");
-const projectNonFunctionReqsDOM = document.querySelector(".project__project-non-functional-reqs");
 const userDOM = document.querySelector(".project__user");
 
-const API_BASE_ROUTE = "/api/v1";
+// Add toast library to give feedback when doing CRUD operations
+
+export const API_BASE_ROUTE = "/api/v1";
 
 const username = localStorage.getItem("username") || "";
-let dashboardId = "";
+export let dashboardId = "";
 
 userDOM.textContent = username;
 
-const fetchProjectRisks = (data) => {
-  projectManagerDOM.innerHTML = "";
-  for (const item of data.dashboards[0].projectRisks) {
-    const projectRiskListElement = document.createElement("li");
-    projectRiskListElement.classList.add("project__section-card");
-    projectRiskListElement.innerHTML = [
-      `<div class="flex justify-between items-center">`,
-      `<span class="project__section-card-status | text-sm text-red-600"
-                                    data-status="high">${item.status}</span>`,
-      `<div class="flex items-center gap-4">
-                                    <i class="cursor-pointer fa-solid fa-pen-to-square"></i>
-                                    <i class="cursor-pointer fa-solid fa-x"></i>
-                                </div>`,
-      `</div>`,
-      ` <p class="project__section-card-title | text-lg font-medium">${item.title}</p>`,
-      `<p class="project__section-card-text">${item.description}</p>`,
-      `</li>`,
-    ].join("");
-    projectRisksDOM.append(projectRiskListElement);
-  }
-};
-
-const fetchFunctionalReqs = (data) => {
-  projectFunctionReqsDOM.innerHTML = "";
-  for (const item of data.dashboards[0].functionalRequirements) {
-    const projectFunctionReqsListElement = document.createElement("li");
-    projectFunctionReqsListElement.classList.add("project__section-card");
-    projectFunctionReqsListElement.innerHTML = [
-      `<div class="flex justify-between items-center">`,
-      `<p class="project__section-card-title | text-lg font-medium">${item.title}</p>`,
-      `<div class="flex items-center gap-4">
-                                    <i class="cursor-pointer fa-solid fa-pen-to-square"></i>
-                                    <i class="cursor-pointer fa-solid fa-x"></i>
-                                </div>`,
-      `</div>`,
-      `<p class="project__section-card-text">${item.description}</p>`,
-      `</li>`,
-    ].join("");
-    projectFunctionReqsDOM.append(projectFunctionReqsListElement);
-  }
-};
-
-const fetchNonFunctionalReqs = (data) => {
-  projectNonFunctionReqsDOM.innerHTML = "";
-  for (const item of data.dashboards[0].nonFunctionalRequirements) {
-    const nonFunctionalReqsListElement = document.createElement("li");
-    nonFunctionalReqsListElement.classList.add("project__section-card");
-    nonFunctionalReqsListElement.innerHTML = [
-      `<div class="flex justify-between items-center">`,
-      `<p class="project__section-card-title | text-lg font-medium">${item.title}</p>`,
-      `<div class="flex items-center gap-4">
-                                    <i class="cursor-pointer fa-solid fa-pen-to-square"></i>
-                                    <i class="cursor-pointer fa-solid fa-x"></i>
-                                </div>`,
-      `</div>`,
-      `<p class="project__section-card-text">${item.description}</p>`,
-      `</li>`,
-    ].join("");
-    projectNonFunctionReqsDOM.append(nonFunctionalReqsListElement);
-  }
-};
-
-const fetchTeamMembers = (data) => {
-  projectTeamMembersDOM.innerHTML = "";
-  for (const item of data.dashboards[0].teamMembers) {
-    const teamMembersListElement = document.createElement("li");
-    teamMembersListElement.classList.add("project__sidebar-members-item");
-    teamMembersListElement.innerHTML = [
-      `<input class="b-0 bg-transparent w-1/2 outline-0" type="text" value="${item.name}" disabled>`,
-      `<div class="flex items-center gap-4">
-                                    <i class="cursor-pointer fa-solid fa-pen-to-square"></i>
-                                    <i class="cursor-pointer fa-solid fa-x"></i>
-                                </div>`,
-      `</li>`,
-    ].join("");
-    projectTeamMembersDOM.append(teamMembersListElement);
-  }
-};
-
-// GET request to "/" to fetch the user's dashboard data
-const fetchDashboardData = async () => {
+export const fetchDashboardData = async () => {
   const token = localStorage.getItem("token");
 
   try {
-    const { data } = await axios.get(`${API_BASE_ROUTE}/dashboard`, {
+    const response = await axios.get(`${API_BASE_ROUTE}/dashboard`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-
-    dashboardId = data.dashboards[0]._id;
-
-    projectTitleDOM.value = data.dashboards[0].title;
-    fetchProjectRisks(data);
-    fetchFunctionalReqs(data);
-    fetchNonFunctionalReqs(data);
-    fetchTeamMembers(data);
+    const { data } = response;
+    return data;
   } catch (error) {
     console.log(error.response);
   }
 };
 
-await fetchDashboardData();
+export const displayDashboardData = async () => {
+  const data = await fetchDashboardData();
+
+  dashboardId = data.dashboards[0]._id;
+
+  projectTitleDOM.value = data.dashboards[0].title;
+  projectManagerDOM.value = data.dashboards[0].projectManager;
+  fetchProjectRisks(data);
+  fetchFunctionalReqs(data);
+  fetchNonFunctionalReqs(data);
+  fetchTeamMembers(data);
+};
+
+await displayDashboardData();
+
+// Update Project Risks - CRUD
+// const editProjectRiskModalDOM = document.querySelector("#edit-project-risk-modal");
+// const editProjectRiskBtns = document.querySelectorAll(".project-risk-edit-btn");
+// const projectRiskIdDOM = document.querySelector("#project-risk-id");
+// const projectRiskTitleDOM = document.querySelector(".project-risk-name");
+// const projectRiskDescriptionDOM = document.querySelector(".project-risk-description");
+// let projectRiskId = "";
+
+// const handleEditProjectRisk = async (e) => {
+//   editProjectRiskModalDOM.showModal();
+
+//   const clickedElement = e.target;
+//   const projectRiskElement = clickedElement.closest(".project__section-card");
+
+//   if (projectRiskElement) {
+//     projectRiskId = projectRiskElement.dataset.id;
+
+//     const token = localStorage.getItem("token");
+//     try {
+//       const { data } = await axios.get(`${API_BASE_ROUTE}/dashboard`, {
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//         },
+//       });
+
+//       for (const risk of data.dashboards[0].projectRisks) {
+//         if (risk._id === projectRiskId) {
+//           let { _id: projectRiskID, title, description } = risk;
+//           projectRiskIdDOM.textContent = projectRiskID;
+//           projectRiskTitleDOM.value = title;
+//           projectRiskDescriptionDOM.value = description;
+//         }
+//       }
+//     } catch (error) {
+//       console.log(error.response);
+//     }
+//   }
+// };
+
+// GET request to "/" to fetch the user's dashboard data
+// const fetchDashboardData = async () => {
+//   const token = localStorage.getItem("token");
+
+//   try {
+//     const { data } = await axios.get(`${API_BASE_ROUTE}/dashboard`, {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//     });
+
+//     dashboardId = data.dashboards[0]._id;
+
+//     projectTitleDOM.value = data.dashboards[0].title;
+//     projectManagerDOM.value = data.dashboards[0].projectManager;
+//     fetchProjectRisks(data);
+//     fetchFunctionalReqs(data);
+//     fetchNonFunctionalReqs(data);
+//     fetchTeamMembers(data);
+//   } catch (error) {
+//     console.log(error.response);
+//   }
+// };
+
+// await fetchDashboardData();
 
 // Event Listeners
 
 // Update Title - CRUD
-projectTitleDOM.addEventListener("change", async () => {
-  const token = localStorage.getItem("token");
+// projectTitleDOM.addEventListener("change", async () => {
+//   const token = localStorage.getItem("token");
 
-  try {
-    await axios.patch(
-      `${API_BASE_ROUTE}/dashboard/${dashboardId}/title`,
-      {
-        title: projectTitleDOM.value,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    await fetchDashboardData();
-  } catch (error) {
-    console.log(error.response);
-  }
-});
+//   try {
+//     await axios.patch(
+//       `${API_BASE_ROUTE}/dashboard/${dashboardId}/title`,
+//       {
+//         title: projectTitleDOM.value,
+//       },
+//       {
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//         },
+//       }
+//     );
+//     await fetchDashboardData();
+//   } catch (error) {
+//     console.log(error.response);
+//   }
+// });
+
+// // Update Project Manager - CRUD
+// const projectManagerEditBtn = document.querySelector(".project-manager-edit-btn");
+// projectManagerEditBtn.addEventListener("click", async () => {
+//   projectManagerDOM.focus();
+//   projectManagerDOM.selectionStart = projectManagerDOM.value.length;
+//   projectManagerDOM.scrollLeft = projectManagerDOM.scrollWidth;
+// });
+
+// projectManagerDOM.addEventListener("change", async () => {
+//   const token = localStorage.getItem("token");
+//   try {
+//     await axios.patch(
+//       `${API_BASE_ROUTE}/dashboard/${dashboardId}/project-manager`,
+//       {
+//         projectManager: projectManagerDOM.value,
+//       },
+//       {
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//         },
+//       }
+//     );
+//   } catch (error) {
+//     console.log(error.response);
+//   }
+// });
+
+// const projectRiskFormDOM = document.querySelector(".edit-modal__form");
+// const handleProjectRiskEditSubmit = async () => {
+//   const token = localStorage.getItem("token");
+
+//   const newProjectRiskTitle = projectRiskTitleDOM.value;
+//   const newProjectRiskDescription = projectRiskDescriptionDOM.value;
+//   try {
+//     await axios.patch(
+//       `${API_BASE_ROUTE}/dashboard/${dashboardId}/project-risks/${projectRiskId}`,
+//       {
+//         title: newProjectRiskTitle,
+//         description: newProjectRiskDescription,
+//       },
+//       {
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//         },
+//       }
+//     );
+//     editProjectRiskModalDOM.close();
+//     await fetchDashboardData();
+//   } catch (error) {
+//     console.log(error.response);
+//   }
+// };
+
+// projectRiskFormDOM.addEventListener("submit", handleProjectRiskEditSubmit);

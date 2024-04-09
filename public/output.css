@@ -828,8 +828,8 @@ ul {
   display: flex;
   align-items: center;
   border-radius: 0.25rem;
-  justify-content: space-between;
   padding: 0.5rem;
+  justify-content: space-between;
 }
 
 .project__sidebar-members-item:hover {
@@ -856,14 +856,17 @@ ul {
 
 [data-status="high"] {
   background-color: hsla(0, 84.2%, 60.2%, 0.4);
+  color: hsla(0, 84.2%, 60.2%, 1);
 }
 
 [data-status="moderate"] {
   background-color: hsla(40.6, 96.1%, 40.4%, 0.4);
+  color: hsla(40.6, 96.1%, 40.4%, 1);
 }
 
 [data-status="low"] {
   background-color: hsla(142.1, 76.2%, 36.3%, 0.4);
+  color: hsla(142.1, 76.2%, 36.3%, 1);
 }
 
 .project__section-card-title {
@@ -883,4 +886,51 @@ ul {
 
 .project__sidebar-members-submit:hover {
   filter: opacity(0.8);
+}
+
+.edit-modal {
+  margin: revert; /* so the modal doesn't get stuck to the top left of the screen */
+  padding: 1.5em;
+  max-width: 50ch;
+  border: 0;
+  box-shadow: 0 0 1em rgb(0 0 0 / 0.3);
+  border-radius: 0.5em;
+}
+
+.project-risk-name {
+  outline: 1px solid black;
+  padding-inline: 0.25em;
+}
+
+.project-risk-description {
+  display: block;
+  outline: 1px solid black;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.close-modal {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  border: none;
+  outline: none;
+}
+/* 
+dialog:not([open]) {
+  display: none;
+} */
+
+.save-btn {
+  background-color: var(--clr-primary-400);
+  color: var(--clr-nuetral-100);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding-block: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

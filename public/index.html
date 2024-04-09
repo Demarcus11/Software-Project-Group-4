@@ -21,12 +21,12 @@
             <h2 class="project__sidebar-title | text-2xl">Team Members</h2>
 
             <ul class="project__sidebar-members | mt-4 grid gap-4"></ul>
-            <form action="">
-                <input class="hidden" type="text" placeholder="Enter name...">
-                <button class="project__sidebar-members-submit | w-full mt-4 py-[0.5rem]" type="submit">
-                    <i class="fa-solid fa-plus"></i>
-                </button>
-            </form>
+
+            <!-- Maybe people use data attributes for hooking into element with JS because if you wanted to change a class name, it would only affect the HTML and CSS, and not the JS -->
+            <button class="project__sidebar-members-submit | w-full mt-4 py-[0.5rem]" type="submit">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+
 
 
             <div class="flex items-center gap-16 absolute bottom-4">
@@ -52,7 +52,7 @@
                             <input class="project__input project__owner-name | border-0 outline-0 w-[20%]" type="text"
                                 placeholder="Enter name..." value="John Doe">
                             <div class="flex items-center gap-4">
-                                <i class="cursor-pointer fa-solid fa-pen-to-square"></i>
+                                <i class="project-manager-edit-btn | cursor-pointer fa-solid fa-pen-to-square"></i>
                                 <i class="cursor-pointer fa-solid fa-x"></i>
                             </div>
                         </div>
@@ -81,6 +81,48 @@
                     <ul class="project__project-non-functional-reqs | grid gap-4 mt-4"></ul>
                 </div>
             </main>
+
+            <dialog class="edit-modal | relative" id="edit-project-risk-modal">
+                <button class="close-modal">
+                    <i class="fa-solid fa-x"></i>
+                </button>
+                <h2 class="edit-modal__title">Edit Project Risk</h2>
+                <form class="edit-modal__form | grid gap-4 mt-4" action="" method="dialog">
+                    <div class="flex items-center gap-2">
+                        <label for="project-risk-id">Project Risk ID:</label>
+                        <p id="project-risk-id"></p>
+                    </div>
+                    <div>
+                        <label for="project-risk-name">Project Risk Title:</label>
+                        <input type="text" id="project-risk-name" class="project-risk-name" value="Title...">
+                    </div>
+                    <div>
+                        <label for="project-risk-description">Project Risk Description:</label>
+                        <textarea class="project-risk-description" name="project-risk-description"
+                            id="project-risk-description"></textarea>
+                    </div>
+                    <div>
+                        <label for="project-risk-status">Project Risk Status:</label>
+                        <div class="flex items-center gap-4 mt-2">
+                            <div>
+                                <input type="radio" id="project-risk-status-low" name="status" value="Low" />
+                                <label for="project-risk-status-low">Low</label>
+                            </div>
+
+                            <div>
+                                <input type="radio" id="project-risk-status-moderate" name="status" value="Moderate" />
+                                <label for="project-risk-status-moderate">Moderate</label>
+                            </div>
+
+                            <div>
+                                <input type="radio" id="project-risk-status-high" name="status" value="High" />
+                                <label for="project-risk-status-high">High</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="save-btn" type="submit">Save</button>
+                </form>
+            </dialog>
         </div>
     </div>
 
