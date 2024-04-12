@@ -4,8 +4,17 @@ import { fetchNonFunctionalReqs } from "./non-functional-reqs.js";
 import { fetchTeamMembers } from "./team-members.js";
 
 const projectTitleDOM = document.querySelector(".project__main-title");
-const projectManagerDOM = document.querySelector(".project__owner-name");
+const projectManagerNameDOM = document.querySelector(".project__owner-name");
 const userDOM = document.querySelector(".project__user");
+const projectRiskAmountDOM = document.querySelector("#project-risk-amount");
+const projectFunctionalReqAmountDOM = document.querySelector("#project-functional-req-amount");
+const projectNonFunctionalReqAmountDOM = document.querySelector(
+  "#project-non-functional-req-amount"
+);
+const projectManagerEditBtn = document.querySelector(".project-manager-edit-btn");
+const logoutBtn = document.querySelector(".log-out");
+const projectDescriptionEditBtn = document.querySelector(".project-description-edit-btn");
+const projectDescriptionInputDOM = document.querySelector(".project-description");
 
 // Add toast library to give feedback when doing CRUD operations
 
@@ -15,6 +24,67 @@ const username = localStorage.getItem("username") || "";
 export let dashboardId = "";
 
 userDOM.textContent = username;
+
+async function handleProjectDescriptionChange() {
+  const newDescription = {
+    description: projectDescriptionInputDOM.value,
+  };
+
+  const token = localStorage.getItem("token");
+  try {
+    await axios.patch(`${API_BASE_ROUTE}/dashboard/${dashboardId}/description`, newDescription, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    console.log(error.response);
+  }
+}
+
+function handleLogoutClick() {
+  localStorage.removeItem("username");
+  localStorage.removeItem("token");
+  window.location.href = "/";
+}
+
+async function handleProjectTitleChange() {
+  const newProjectTitle = {
+    title: projectTitleDOM.value,
+  };
+
+  const token = localStorage.getItem("token");
+  try {
+    await axios.patch(`${API_BASE_ROUTE}/dashboard/${dashboardId}/title`, newProjectTitle, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    console.log(error.response);
+  }
+}
+
+async function handleProjectManagerChange() {
+  const newProjectManager = {
+    projectManager: projectManagerNameDOM.value,
+  };
+
+  const token = localStorage.getItem("token");
+  try {
+    await axios.patch(
+      `${API_BASE_ROUTE}/dashboard/${dashboardId}/project-manager`,
+      newProjectManager,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  } catch (error) {
+    console.log(error.response);
+  }
+}
 
 export const fetchDashboardData = async () => {
   const token = localStorage.getItem("token");
@@ -38,7 +108,12 @@ export const displayDashboardData = async () => {
   dashboardId = data.dashboards[0]._id;
 
   projectTitleDOM.value = data.dashboards[0].title;
-  projectManagerDOM.value = data.dashboards[0].projectManager;
+  projectManagerNameDOM.value = data.dashboards[0].projectManager;
+  projectRiskAmountDOM.textContent = data.dashboards[0].projectRisks.length;
+  projectFunctionalReqAmountDOM.textContent = data.dashboards[0].functionalRequirements.length;
+  projectNonFunctionalReqAmountDOM.textContent =
+    data.dashboards[0].nonFunctionalRequirements.length;
+  projectDescriptionInputDOM.value = data.dashboards[0].description;
   fetchProjectRisks(data);
   fetchFunctionalReqs(data);
   fetchNonFunctionalReqs(data);
@@ -47,146 +122,23 @@ export const displayDashboardData = async () => {
 
 await displayDashboardData();
 
-// Update Project Risks - CRUD
-// const editProjectRiskModalDOM = document.querySelector("#edit-project-risk-modal");
-// const editProjectRiskBtns = document.querySelectorAll(".project-risk-edit-btn");
-// const projectRiskIdDOM = document.querySelector("#project-risk-id");
-// const projectRiskTitleDOM = document.querySelector(".project-risk-name");
-// const projectRiskDescriptionDOM = document.querySelector(".project-risk-description");
-// let projectRiskId = "";
-
-// const handleEditProjectRisk = async (e) => {
-//   editProjectRiskModalDOM.showModal();
-
-//   const clickedElement = e.target;
-//   const projectRiskElement = clickedElement.closest(".project__section-card");
-
-//   if (projectRiskElement) {
-//     projectRiskId = projectRiskElement.dataset.id;
-
-//     const token = localStorage.getItem("token");
-//     try {
-//       const { data } = await axios.get(`${API_BASE_ROUTE}/dashboard`, {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       });
-
-//       for (const risk of data.dashboards[0].projectRisks) {
-//         if (risk._id === projectRiskId) {
-//           let { _id: projectRiskID, title, description } = risk;
-//           projectRiskIdDOM.textContent = projectRiskID;
-//           projectRiskTitleDOM.value = title;
-//           projectRiskDescriptionDOM.value = description;
-//         }
-//       }
-//     } catch (error) {
-//       console.log(error.response);
-//     }
-//   }
-// };
-
-// GET request to "/" to fetch the user's dashboard data
-// const fetchDashboardData = async () => {
-//   const token = localStorage.getItem("token");
-
-//   try {
-//     const { data } = await axios.get(`${API_BASE_ROUTE}/dashboard`, {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     });
-
-//     dashboardId = data.dashboards[0]._id;
-
-//     projectTitleDOM.value = data.dashboards[0].title;
-//     projectManagerDOM.value = data.dashboards[0].projectManager;
-//     fetchProjectRisks(data);
-//     fetchFunctionalReqs(data);
-//     fetchNonFunctionalReqs(data);
-//     fetchTeamMembers(data);
-//   } catch (error) {
-//     console.log(error.response);
-//   }
-// };
-
-// await fetchDashboardData();
-
 // Event Listeners
+projectTitleDOM.addEventListener("change", handleProjectTitleChange);
+projectManagerEditBtn.addEventListener("click", () => {
+  projectManagerNameDOM.focus();
+  projectManagerNameDOM.selectionStart = projectManagerNameDOM.value.length;
+  projectManagerNameDOM.scrollLeft = projectManagerNameDOM.scrollWidth;
+});
+projectManagerNameDOM.addEventListener("change", handleProjectManagerChange);
+logoutBtn.addEventListener("click", handleLogoutClick);
+projectDescriptionEditBtn.addEventListener("click", () => {
+  projectDescriptionInputDOM.focus();
+});
+projectDescriptionInputDOM.addEventListener("change", handleProjectDescriptionChange);
 
-// Update Title - CRUD
-// projectTitleDOM.addEventListener("change", async () => {
-//   const token = localStorage.getItem("token");
+/*
 
-//   try {
-//     await axios.patch(
-//       `${API_BASE_ROUTE}/dashboard/${dashboardId}/title`,
-//       {
-//         title: projectTitleDOM.value,
-//       },
-//       {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       }
-//     );
-//     await fetchDashboardData();
-//   } catch (error) {
-//     console.log(error.response);
-//   }
-// });
+TODO
 
-// // Update Project Manager - CRUD
-// const projectManagerEditBtn = document.querySelector(".project-manager-edit-btn");
-// projectManagerEditBtn.addEventListener("click", async () => {
-//   projectManagerDOM.focus();
-//   projectManagerDOM.selectionStart = projectManagerDOM.value.length;
-//   projectManagerDOM.scrollLeft = projectManagerDOM.scrollWidth;
-// });
 
-// projectManagerDOM.addEventListener("change", async () => {
-//   const token = localStorage.getItem("token");
-//   try {
-//     await axios.patch(
-//       `${API_BASE_ROUTE}/dashboard/${dashboardId}/project-manager`,
-//       {
-//         projectManager: projectManagerDOM.value,
-//       },
-//       {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       }
-//     );
-//   } catch (error) {
-//     console.log(error.response);
-//   }
-// });
-
-// const projectRiskFormDOM = document.querySelector(".edit-modal__form");
-// const handleProjectRiskEditSubmit = async () => {
-//   const token = localStorage.getItem("token");
-
-//   const newProjectRiskTitle = projectRiskTitleDOM.value;
-//   const newProjectRiskDescription = projectRiskDescriptionDOM.value;
-//   try {
-//     await axios.patch(
-//       `${API_BASE_ROUTE}/dashboard/${dashboardId}/project-risks/${projectRiskId}`,
-//       {
-//         title: newProjectRiskTitle,
-//         description: newProjectRiskDescription,
-//       },
-//       {
-//         headers: {
-//           Authorization: `Bearer ${token}`,
-//         },
-//       }
-//     );
-//     editProjectRiskModalDOM.close();
-//     await fetchDashboardData();
-//   } catch (error) {
-//     console.log(error.response);
-//   }
-// };
-
-// projectRiskFormDOM.addEventListener("submit", handleProjectRiskEditSubmit);
+*/

@@ -6,7 +6,6 @@ import {
 } from "./dashboard.js";
 
 const projectRisksDOM = document.querySelector(".project__project-risks");
-const projectRiskEditBtns = document.querySelectorAll(".project-risk-edit-btn");
 const projectRiskModalDOM = document.querySelector("#edit-project-risk-modal");
 const projectRiskFormDOM = document.querySelector(".edit-modal__form");
 const projectRiskIdDOM = document.querySelector("#project-risk-id");
@@ -16,9 +15,57 @@ const projectRiskStatusLowDOM = document.querySelector("#project-risk-status-low
 const projectRiskStatusModerateDOM = document.querySelector("#project-risk-status-moderate");
 const projectRiskStatusHighDOM = document.querySelector("#project-risk-status-high");
 
+const addProjectRiskModalDOM = document.querySelector("#add-project-risk-modal");
+const addProjectRiskFormDOM = document.querySelector("#add-project-risk-form");
+const addProjectRiskTitleDOM = document.querySelector("#add-project-risk-name");
+const addProjectRiskDescriptionDOM = document.querySelector("#add-project-risk-description");
+const addProjectRiskStatusLowDOM = document.querySelector("#add-project-risk-status-low");
+const addProjectRiskStatusModerateDOM = document.querySelector("#add-project-risk-status-moderate");
+const addProjectRiskStatusHighDOM = document.querySelector("#add-project-risk-status-high");
+const addProjectRiskBtn = document.querySelector("#add-project-risk-btn");
+
 let projectRiskId = "";
 
 // CREATE
+async function handleAddProjectRiskFormSubmit() {
+  // make a new project risk obj
+
+  const newProjectRisk = {
+    title: addProjectRiskTitleDOM.value,
+    description: addProjectRiskDescriptionDOM.value,
+  };
+
+  if (addProjectRiskStatusLowDOM.checked) {
+    newProjectRisk.status = "Low";
+    if (document.querySelector(".project__section-card-status")) {
+      document.querySelector(".project__section-card-status").dataset.status = "low";
+    }
+  } else if (addProjectRiskStatusModerateDOM.checked) {
+    newProjectRisk.status = "Moderate";
+    if (document.querySelector(".project__section-card-status")) {
+      document.querySelector(".project__section-card-status").dataset.status = "moderate";
+    }
+  } else if (addProjectRiskStatusHighDOM.checked) {
+    newProjectRisk.status = "High";
+    if (document.querySelector(".project__section-card-status")) {
+      document.querySelector(".project__section-card-status").dataset.status = "high";
+    }
+  }
+  // make a POST request
+
+  const token = localStorage.getItem("token");
+  try {
+    await axios.post(`${API_BASE_ROUTE}/dashboard/${dashboardId}/project-risks`, newProjectRisk, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    console.log(error.response);
+  }
+  // re-render project risks
+  await displayDashboardData();
+}
 
 // READ
 export function fetchProjectRisks(data) {
@@ -33,7 +80,7 @@ export function fetchProjectRisks(data) {
                                     data-status=${item.status.toLowerCase()}>${item.status}</span>`,
       `<div class="flex items-center gap-4">
                                     <i class="project-risk-edit-btn | cursor-pointer fa-solid fa-pen-to-square"></i>
-                                    <i class="cursor-pointer fa-solid fa-x"></i>
+                                    <i class="project-risk-delete-btn | cursor-pointer fa-solid fa-x"></i>
                                 </div>`,
       `</div>`,
       ` <p class="project__section-card-title | text-lg font-medium">${item.title}</p>`,
@@ -47,6 +94,11 @@ export function fetchProjectRisks(data) {
   const editRiskBtns = document.querySelectorAll(".project-risk-edit-btn");
   editRiskBtns.forEach((button) => {
     button.addEventListener("click", handleEditRiskClick);
+  });
+
+  const projectRiskDeleteBtns = document.querySelectorAll(".project-risk-delete-btn");
+  projectRiskDeleteBtns.forEach((button) => {
+    button.addEventListener("click", handleDeleteProjectRiskClick);
   });
 }
 
@@ -125,6 +177,31 @@ async function handleProjectRiskFormSubmit() {
   }
 }
 
-projectRiskFormDOM.addEventListener("submit", handleProjectRiskFormSubmit);
-
 // DELETE
+async function handleDeleteProjectRiskClick(e) {
+  const projectRiskElement = e.target.closest(".project__section-card");
+  const projectRiskId = projectRiskElement.dataset.id;
+
+  const token = localStorage.getItem("token");
+  try {
+    await axios.delete(
+      `${API_BASE_ROUTE}/dashboard/${dashboardId}/project-risks/${projectRiskId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  } catch (error) {
+    console.log(error.response);
+  }
+
+  await displayDashboardData();
+}
+
+addProjectRiskBtn.addEventListener("click", () => {
+  // show modal
+  addProjectRiskModalDOM.showModal();
+});
+addProjectRiskFormDOM.addEventListener("submit", handleAddProjectRiskFormSubmit);
+projectRiskFormDOM.addEventListener("submit", handleProjectRiskFormSubmit);

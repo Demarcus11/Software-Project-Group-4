@@ -64,6 +64,33 @@ export const updateProjectManager = async (req, res) => {
   res.status(StatusCodes.OK).send();
 };
 
+export const updateDescription = async (req, res) => {
+  const {
+    body: { description },
+    user: { userId },
+    params: { dashboardId },
+  } = req;
+
+  if (description === "") {
+    throw new BadRequestError("Please provide a description");
+  }
+
+  const updatedDescription = await Dashboard.findOneAndUpdate(
+    {
+      _id: dashboardId,
+      createdBy: userId,
+    },
+    req.body,
+    { new: true, runValidators: true }
+  );
+
+  if (!updatedDescription) {
+    throw new NotFoundError(`No dashboard with id: ${dashboardId}`);
+  }
+
+  res.status(StatusCodes.OK).send();
+};
+
 export const updateTeamMember = async (req, res) => {
   const {
     user: { userId },

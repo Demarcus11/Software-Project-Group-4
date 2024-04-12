@@ -10,6 +10,7 @@ import {
   updateNonFunctionalReq,
   updateProjectRisk,
   updateTeamMember,
+  updateDescription,
   deleteTeamMember,
   deleteProjectRisk,
   deleteFunctionalReq,
@@ -32,6 +33,7 @@ router.route("/:dashboardId/non-functional-requirements").post(addNonFunctionalR
 // PATCH routes (Update)
 router.route("/:dashboardId/title").patch(updateTitle);
 router.route("/:dashboardId/project-manager").patch(updateProjectManager);
+router.route("/:dashboardId/description").patch(updateDescription);
 router.route("/:dashboardId/team-members/:id").patch(updateTeamMember);
 router.route("/:dashboardId/project-risks/:id").patch(updateProjectRisk);
 router.route("/:dashboardId/functional-requirements/:id").patch(updateFunctionalReq);

@@ -12,6 +12,11 @@ const DashboardSchema = new mongoose.Schema(
       default: "John Doe",
       trim: true,
     },
+    description: {
+      type: String,
+      default: "Project Description",
+      trim: true,
+    },
     teamMembers: [
       {
         name: {

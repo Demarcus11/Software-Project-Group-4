@@ -14,7 +14,7 @@ const login = async (e) => {
     localStorage.setItem("username", data.user.username);
     localStorage.setItem("token", data.token);
 
-    window.location.href = "/";
+    window.location.href = "/dashboard.html";
   } catch (error) {
     console.log(error.response.data.msg);
     localStorage.removeItem("token", data.token);

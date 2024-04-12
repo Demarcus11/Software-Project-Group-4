@@ -4,127 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Management System</title>
+    <title>Project Management System - Login</title>
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdn.tailwindcss.com"></script>
     <!-- Output CSS file -->
-    <link rel="stylesheet" href="./output.css">
-    <script src="./dashboard.js" type="module" defer></script>
+    <link rel="stylesheet" href="./login.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./login.js" type="module" defer></script>
+
 </head>
 
 <body>
-    <div class="project">
-        <aside class="project__sidebar | p-4 relative">
-            <h2 class="project__sidebar-title | text-2xl">Team Members</h2>
-
-            <ul class="project__sidebar-members | mt-4 grid gap-4"></ul>
-
-            <!-- Maybe people use data attributes for hooking into element with JS because if you wanted to change a class name, it would only affect the HTML and CSS, and not the JS -->
-            <button class="project__sidebar-members-submit | w-full mt-4 py-[0.5rem]" type="submit">
-                <i class="fa-solid fa-plus"></i>
-            </button>
-
-
-
-            <div class="flex items-center gap-16 absolute bottom-4">
-                <p class="project__user"></p>
-                <!-- Log out icon -->
-                <button class="log-out">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                </button>
-            </div>
-        </aside>
-
-        <div class="project__content | pt-4 overflow-auto h-screen pb-20">
-            <header class="project__section project__header | rounded-2xl p-4">
-                <form class="project__header-form | grid gap-4" action="">
-                    <div class="flex items-center">
-                        <input class="project__input project__main-title | border-0 outline-0 text-2xl font-bold"
-                            type="text" placeholder="Enter Project Title..." value="Software Project Title" />
-                    </div>
-
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <label for="project__owner-name">Project Manager:</label>
-                            <input class="project__input project__owner-name | border-0 outline-0 w-[20%]" type="text"
-                                placeholder="Enter name..." value="John Doe">
-                            <div class="flex items-center gap-4">
-                                <i class="project-manager-edit-btn | cursor-pointer fa-solid fa-pen-to-square"></i>
-                                <i class="cursor-pointer fa-solid fa-x"></i>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </header>
-
-
-
-            <main class="project__main">
-                <div class="project__section | rounded-2xl p-4 mt-4">
-                    <h2 class="project__main-subtitle | text-xl font-semibold">Project Risks</h2>
-
-                    <ul class="project__project-risks | grid gap-4 mt-4"></ul>
-                </div>
-
-                <div class="project__section | rounded-2xl p-4 mt-4">
-                    <h2 class="project__main-subtitle | text-xl font-semibold">Functional Requirements</h2>
-
-                    <ul class="project__project-functional-reqs | grid gap-4 mt-4"></ul>
-                </div>
-
-                <div class="project__section | rounded-2xl p-4 mt-4">
-                    <h2 class="project__main-subtitle | text-xl font-semibold">Non-functional Requirements</h2>
-
-                    <ul class="project__project-non-functional-reqs | grid gap-4 mt-4"></ul>
-                </div>
-            </main>
-
-            <dialog class="edit-modal | relative" id="edit-project-risk-modal">
-                <button class="close-modal">
-                    <i class="fa-solid fa-x"></i>
-                </button>
-                <h2 class="edit-modal__title">Edit Project Risk</h2>
-                <form class="edit-modal__form | grid gap-4 mt-4" action="" method="dialog">
-                    <div class="flex items-center gap-2">
-                        <label for="project-risk-id">Project Risk ID:</label>
-                        <p id="project-risk-id"></p>
-                    </div>
-                    <div>
-                        <label for="project-risk-name">Project Risk Title:</label>
-                        <input type="text" id="project-risk-name" class="project-risk-name" value="Title...">
-                    </div>
-                    <div>
-                        <label for="project-risk-description">Project Risk Description:</label>
-                        <textarea class="project-risk-description" name="project-risk-description"
-                            id="project-risk-description"></textarea>
-                    </div>
-                    <div>
-                        <label for="project-risk-status">Project Risk Status:</label>
-                        <div class="flex items-center gap-4 mt-2">
-                            <div>
-                                <input type="radio" id="project-risk-status-low" name="status" value="Low" />
-                                <label for="project-risk-status-low">Low</label>
-                            </div>
-
-                            <div>
-                                <input type="radio" id="project-risk-status-moderate" name="status" value="Moderate" />
-                                <label for="project-risk-status-moderate">Moderate</label>
-                            </div>
-
-                            <div>
-                                <input type="radio" id="project-risk-status-high" name="status" value="High" />
-                                <label for="project-risk-status-high">High</label>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="save-btn" type="submit">Save</button>
-                </form>
-            </dialog>
+    <main class="login">
+        <div>
+            <img src="./images/login.png" class="login__img" alt="">
         </div>
-    </div>
+
+        <form action="" class="login__form | text-center grid gap-10">
+            <h1 class="text-xl font-bold text-center">Login</h1>
+
+            <div class="grid gap-4">
+                <div>
+                    <input type="text" placeholder="Username" class="login__username | px-4 py-2 rounded w-full">
+                </div>
+                <div>
+                    <input type="password" placeholder="Password" class="login__password | px-4 py-2 rounded w-full">
+                </div>
+            </div>
+
+            <div class="grid gap-4">
+                <button class="login__btn" type="submit">Login</button>
+                <a href="./register.html" class="login__cac">
+                    Create an account
+                </a>
+            </div>
+        </form>
+    </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
         integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
