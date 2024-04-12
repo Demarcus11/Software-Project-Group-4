@@ -5,6 +5,8 @@ const projectTeamMemberAddBtn = document.querySelector(".project__sidebar-member
 const projectTeamMemberModalDOM = document.querySelector("#add-project-team-member-modal");
 const projectTeamMemberFormDOM = document.querySelector("#add-project-team-member-form");
 const projectTeamMemberModalInputDOM = document.querySelector("#add-project-team-member-name");
+const addProjectTeamMemberCloseBtn = document.querySelector(".add-project-team-member-close-btn");
+const addProjectTeamMemberModal = document.querySelector("#add-project-team-member-modal");
 
 // CREATE
 async function handleAddTeamMemberFormSubmit() {
@@ -110,3 +112,6 @@ projectTeamMemberAddBtn.addEventListener("click", () => {
   projectTeamMemberModalDOM.showModal();
 });
 projectTeamMemberFormDOM.addEventListener("submit", handleAddTeamMemberFormSubmit);
+addProjectTeamMemberCloseBtn.addEventListener("click", () => {
+  projectTeamMemberModalDOM.close();
+});

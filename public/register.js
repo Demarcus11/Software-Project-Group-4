@@ -4,6 +4,9 @@ const registerFormDOM = document.querySelector("#register__form");
 
 const API_BASE_ROUTE = "/api/v1";
 
+localStorage.removeItem("username");
+localStorage.removeItem("token");
+
 async function createDefaultDashboard() {
   try {
   } catch (error) {

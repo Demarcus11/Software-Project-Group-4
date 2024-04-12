@@ -25,6 +25,34 @@ export let dashboardId = "";
 
 userDOM.textContent = username;
 
+// Notifications
+function alertSuccess(message) {
+  Toastify({
+    text: message,
+    duration: 5000,
+    close: false,
+    gravity: "bottom",
+    style: {
+      background: "green",
+      color: "white",
+      textAlign: "center",
+    },
+  }).showToast();
+}
+
+function alertError(message) {
+  Toastify({
+    text: message,
+    duration: 5000,
+    close: false,
+    style: {
+      background: "red",
+      color: "white",
+      textAlign: "center",
+    },
+  }).showToast();
+}
+
 async function handleProjectDescriptionChange() {
   const newDescription = {
     description: projectDescriptionInputDOM.value,
@@ -60,6 +88,8 @@ async function handleProjectTitleChange() {
         Authorization: `Bearer ${token}`,
       },
     });
+
+    alertSuccess("Title saved.");
   } catch (error) {
     console.log(error.response);
   }
@@ -140,5 +170,6 @@ projectDescriptionInputDOM.addEventListener("change", handleProjectDescriptionCh
 
 TODO
 
+1. Toast library for visual confirmations
 
 */

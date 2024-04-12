@@ -25,6 +25,12 @@ const addNonFunctionalReqDescriptionDOM = document.querySelector(
   "#add-project-non-functional-req-description"
 );
 const addNonFunctionalReqBtn = document.querySelector("#add-non-functional-req-btn");
+const editNonFunctionalReqCloseBtn = document.querySelector(
+  ".edit-project-non-functional-close-btn"
+);
+const editNonFunctionalReqModal = document.querySelector("#edit-project-non-functional-req-modal");
+const addNonFunctionalReqCloseBtn = document.querySelector(".add-project-non-functional-close-btn");
+const addNonFunctionalReqModal = document.querySelector("#add-project-non-functional-req-modal");
 
 let projectNonFunctionalReqId = "";
 
@@ -170,3 +176,9 @@ addNonFunctionalReqBtn.addEventListener("click", () => {
   addNonFunctionalReqModalDOM.showModal();
 });
 addNonFunctionalReqFormDOM.addEventListener("submit", handleAddNonFunctionalReqFormSubmit);
+editNonFunctionalReqCloseBtn.addEventListener("click", () => {
+  editNonFunctionalReqModal.close();
+});
+addNonFunctionalReqCloseBtn.addEventListener("click", () => {
+  addNonFunctionalReqModal.close();
+});

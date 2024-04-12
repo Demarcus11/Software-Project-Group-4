@@ -12,7 +12,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Output CSS file -->
     <link rel="stylesheet" href="./output.css">
+    <!-- Toastify CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!-- Toastify JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js" defer></script>
     <script src="./dashboard.js" type="module" defer></script>
+
 </head>
 
 <body>
@@ -116,7 +121,7 @@
 
             <!-- Update Modals -->
             <dialog class="edit-modal | relative" id="edit-project-risk-modal">
-                <button class="close-modal">
+                <button class="close-modal edit-project-risk-close-btn">
                     <i class="fa-solid fa-x"></i>
                 </button>
                 <h2 class="edit-modal__title">Edit Project Risk</h2>
@@ -159,7 +164,7 @@
             </dialog>
 
             <dialog class="edit-modal | relative" id="edit-project-functional-req-modal">
-                <button class="close-modal">
+                <button class="close-modal edit-project-function-req-close-btn">
                     <i class="fa-solid fa-x"></i>
                 </button>
                 <h2 class="edit-modal__title">Edit Project Functional Requirement</h2>
@@ -187,7 +192,7 @@
             </dialog>
 
             <dialog class="edit-modal | relative" id="edit-project-non-functional-req-modal">
-                <button class="close-modal">
+                <button class="close-modal edit-project-non-functional-close-btn">
                     <i class="fa-solid fa-x"></i>
                 </button>
                 <h2 class="edit-modal__title">Edit Project Non-Functional Requirement</h2>
@@ -218,7 +223,7 @@
 
             <!-- Add modals -->
             <dialog class="edit-modal | relative" id="add-project-team-member-modal">
-                <button class="close-modal">
+                <button class="close-modal add-project-team-member-close-btn">
                     <i class="fa-solid fa-x"></i>
                 </button>
                 <h2 class="edit-modal__title">Add Team Member</h2>
@@ -227,7 +232,7 @@
                     <div>
                         <label for="add-project-team-member-name">Team Member Name:</label>
                         <input type="text" id="add-project-team-member-name"
-                            class="edit-modal-name add-project-team-member-input" value="Title...">
+                            class="edit-modal-name add-project-team-member-input">
                     </div>
 
                     <button class="save-btn" type="submit">Save</button>
@@ -235,15 +240,14 @@
             </dialog>
 
             <dialog class="edit-modal add-project-risk | relative" id="add-project-risk-modal">
-                <button class="close-modal">
+                <button class="close-modal add-project-risk-close-btn">
                     <i class="fa-solid fa-x"></i>
                 </button>
                 <h2 class="modal__title">Add Project Risk</h2>
                 <form class="edit-modal__form | grid gap-4 mt-4" action="" method="dialog" id="add-project-risk-form">
                     <div>
                         <label for="add-project-risk-name">Project Risk Title:</label>
-                        <input type="text" id="add-project-risk-name" class="edit-modal-name project-risk-name"
-                            value="Title...">
+                        <input type="text" id="add-project-risk-name" class="edit-modal-name project-risk-name">
                     </div>
                     <div>
                         <label for="add-project-risk-description">Project Risk Description:</label>
@@ -275,7 +279,7 @@
             </dialog>
 
             <dialog class="edit-modal | relative" id="add-project-functional-req-modal">
-                <button class="close-modal">
+                <button class="close-modal add-project-function-req-close-btn">
                     <i class="fa-solid fa-x"></i>
                 </button>
                 <h2 class="edit-modal__title">Add Project Functional Requirement</h2>
@@ -284,7 +288,7 @@
                     <div>
                         <label for="add-project-functional-req-name">Project Functional Requirement Title:</label>
                         <input type="text" id="add-project-functional-req-name"
-                            class="edit-modal-name add-project-functional-req-name" value="Title...">
+                            class="edit-modal-name add-project-functional-req-name">
                     </div>
                     <div>
                         <label for="project-functional-req-description">Project Functional Requirement
@@ -299,7 +303,7 @@
             </dialog>
 
             <dialog class="edit-modal | relative" id="add-project-non-functional-req-modal">
-                <button class="close-modal">
+                <button class="close-modal add-project-non-functional-close-btn">
                     <i class="fa-solid fa-x"></i>
                 </button>
                 <h2 class="edit-modal__title">Add Project Non-Functional Requirement</h2>
@@ -309,7 +313,7 @@
                         <label for="add-project-non-functional-req-name">Project Non-Functional Requirement
                             Title:</label>
                         <input type="text" id="add-project-non-functional-req-name"
-                            class="edit-modal-name add-project-non-functional-req-name" value="Title...">
+                            class="edit-modal-name add-project-non-functional-req-name">
                     </div>
                     <div>
                         <label for="project-functional-req-description">Project Non-Functional Requirement

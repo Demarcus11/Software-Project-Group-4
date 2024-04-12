@@ -2,6 +2,9 @@ const usernameInputDOM = document.querySelector(".login__username");
 const passwordInputDOM = document.querySelector(".login__password");
 const formDOM = document.querySelector(".login__form");
 
+localStorage.removeItem("username");
+localStorage.removeItem("token");
+
 const login = async (e) => {
   e.preventDefault();
 

@@ -23,6 +23,10 @@ const addProjectRiskStatusLowDOM = document.querySelector("#add-project-risk-sta
 const addProjectRiskStatusModerateDOM = document.querySelector("#add-project-risk-status-moderate");
 const addProjectRiskStatusHighDOM = document.querySelector("#add-project-risk-status-high");
 const addProjectRiskBtn = document.querySelector("#add-project-risk-btn");
+const addProjectRiskCloseBtn = document.querySelector(".add-project-risk-close-btn");
+
+const editProjectRiskCloseBtn = document.querySelector(".edit-project-risk-close-btn");
+const editProjectRiskModalDOM = document.querySelector("#edit-project-risk-modal");
 
 let projectRiskId = "";
 
@@ -200,8 +204,13 @@ async function handleDeleteProjectRiskClick(e) {
 }
 
 addProjectRiskBtn.addEventListener("click", () => {
-  // show modal
   addProjectRiskModalDOM.showModal();
 });
 addProjectRiskFormDOM.addEventListener("submit", handleAddProjectRiskFormSubmit);
 projectRiskFormDOM.addEventListener("submit", handleProjectRiskFormSubmit);
+editProjectRiskCloseBtn.addEventListener("click", () => {
+  editProjectRiskModalDOM.close();
+});
+addProjectRiskCloseBtn.addEventListener("click", () => {
+  addProjectRiskModalDOM.close();
+});

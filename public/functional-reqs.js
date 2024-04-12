@@ -22,6 +22,10 @@ const addFunctionalReqDescriptionDOM = document.querySelector(
 );
 const addFunctionalReqBtn = document.querySelector("#add-functional-req-btn");
 
+const addFunctionalReqCloseBtn = document.querySelector(".add-project-function-req-close-btn");
+const editFunctionalReqCloseBtn = document.querySelector(".edit-project-function-req-close-btn");
+const editFunctionalReqModalDOM = document.querySelector("#edit-project-functional-req-modal");
+
 let projectFunctionalReqId = "";
 
 // CREATE
@@ -164,3 +168,9 @@ addFunctionalReqBtn.addEventListener("click", () => {
   addFunctionalReqModalDOM.showModal();
 });
 addFunctionalReqFormDOM.addEventListener("submit", handleAddFunctionalReqFormSubmit);
+addFunctionalReqCloseBtn.addEventListener("click", () => {
+  addFunctionalReqModalDOM.close();
+});
+editFunctionalReqCloseBtn.addEventListener("click", () => {
+  editFunctionalReqModalDOM.close();
+});
