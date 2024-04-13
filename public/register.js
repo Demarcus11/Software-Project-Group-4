@@ -10,7 +10,7 @@ localStorage.removeItem("token");
 async function createDefaultDashboard() {
   try {
   } catch (error) {
-    console.log(error.response);
+    console.log(error);
   }
 }
 
@@ -23,14 +23,25 @@ async function handleRegisterFormSubmit(e) {
   };
 
   try {
-    const { data } = await axios.post(`${API_BASE_ROUTE}/auth/register`, register);
+    const response = await fetch(`${API_BASE_ROUTE}/auth/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(register),
+    });
+
+    if (!response.ok) {
+      return;
+    }
+    const data = await response.json();
     localStorage.setItem("username", data.user.username);
     localStorage.setItem("token", data.token);
 
     await createDefaultDashboard();
     window.location.href = "/dashboard.html";
   } catch (error) {
-    console.log(error.response);
+    console.log(error);
     localStorage.removeItem("username");
     localStorage.removeItem("token");
   }

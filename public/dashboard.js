@@ -66,7 +66,7 @@ async function handleProjectDescriptionChange() {
       },
     });
   } catch (error) {
-    console.log(error.response);
+    console.log(error);
   }
 }
 
@@ -83,15 +83,22 @@ async function handleProjectTitleChange() {
 
   const token = localStorage.getItem("token");
   try {
-    await axios.patch(`${API_BASE_ROUTE}/dashboard/${dashboardId}/title`, newProjectTitle, {
+    const response = await fetch(`${API_BASE_ROUTE}/dashboard/${dashboardId}/title`, {
+      method: "PATCH",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
+      body: JSON.stringify(newProjectTitle),
     });
+
+    if (!response.ok) {
+      return;
+    }
 
     alertSuccess("Title saved.");
   } catch (error) {
-    console.log(error.response);
+    console.log(error);
   }
 }
 
@@ -102,17 +109,20 @@ async function handleProjectManagerChange() {
 
   const token = localStorage.getItem("token");
   try {
-    await axios.patch(
-      `${API_BASE_ROUTE}/dashboard/${dashboardId}/project-manager`,
-      newProjectManager,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await fetch(`${API_BASE_ROUTE}/dashboard/${dashboardId}/project-manager`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(newProjectManager),
+    });
+
+    if (!response.ok) {
+      return;
+    }
   } catch (error) {
-    console.log(error.response);
+    console.log(error);
   }
 }
 
@@ -120,15 +130,22 @@ export const fetchDashboardData = async () => {
   const token = localStorage.getItem("token");
 
   try {
-    const response = await axios.get(`${API_BASE_ROUTE}/dashboard`, {
+    const response = await fetch(`${API_BASE_ROUTE}/dashboard`, {
+      method: "GET",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
-    const { data } = response;
+
+    if (!response.ok) {
+      return;
+    }
+
+    const data = await response.json();
     return data;
   } catch (error) {
-    console.log(error.response);
+    console.log(error);
   }
 };
 

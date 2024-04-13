@@ -6,7 +6,6 @@ const projectTeamMemberModalDOM = document.querySelector("#add-project-team-memb
 const projectTeamMemberFormDOM = document.querySelector("#add-project-team-member-form");
 const projectTeamMemberModalInputDOM = document.querySelector("#add-project-team-member-name");
 const addProjectTeamMemberCloseBtn = document.querySelector(".add-project-team-member-close-btn");
-const addProjectTeamMemberModal = document.querySelector("#add-project-team-member-modal");
 
 // CREATE
 async function handleAddTeamMemberFormSubmit() {
@@ -16,13 +15,20 @@ async function handleAddTeamMemberFormSubmit() {
     name: projectTeamMemberModalInputDOM.value,
   };
   try {
-    await axios.post(`${API_BASE_ROUTE}/dashboard/${dashboardId}/team-members`, newTeamMember, {
+    const response = await fetch(`${API_BASE_ROUTE}/dashboard/${dashboardId}/team-members`, {
+      method: "POST",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
+      body: JSON.stringify(newTeamMember),
     });
+
+    if (!response.ok) {
+      return;
+    }
   } catch (error) {
-    console.log(error.response);
+    console.log(error);
   }
 
   await displayDashboardData();
@@ -70,19 +76,25 @@ async function handleEditTeamMemberClick(e) {
       const token = localStorage.getItem("token");
       const teamMemberId = e.target.closest(".project__sidebar-members-item").dataset.id;
       try {
-        await axios.patch(
+        const response = await fetch(
           `${API_BASE_ROUTE}/dashboard/${dashboardId}/team-members/${teamMemberId}`,
           {
-            name: teamMemberInput.value,
-          },
-          {
+            method: "PATCH",
             headers: {
+              "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
             },
+            body: JSON.stringify({
+              name: teamMemberInput.value,
+            }),
           }
         );
+
+        if (!response.ok) {
+          return;
+        }
       } catch (error) {
-        console.log(error.response);
+        console.log(error);
       }
     });
   }
@@ -95,13 +107,22 @@ async function handleDeleteTeamMemberClick(e) {
 
   const token = localStorage.getItem("token");
   try {
-    await axios.delete(`${API_BASE_ROUTE}/dashboard/${dashboardId}/team-members/${teamMemberId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await fetch(
+      `${API_BASE_ROUTE}/dashboard/${dashboardId}/team-members/${teamMemberId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      return;
+    }
   } catch (error) {
-    console.log(error.response);
+    console.log(error);
   }
 
   await displayDashboardData();

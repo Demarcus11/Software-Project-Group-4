@@ -11,10 +11,9 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Output CSS file -->
     <link rel="stylesheet" href="./login.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="./register.js" type="module" defer></script>
+
     <style>
-        #txtPassword {
+        .txt-password {
             -webkit-text-security: disc;
         }
     </style>
@@ -32,26 +31,24 @@
             <div class="grid gap-4">
                 <div>
                     <input type="text" placeholder="Username" id="register__username"
-                        class="register__username | px-4 py-2 rounded w-full">
+                        class="login__input register__username | px-4 py-2 rounded w-full">
                 </div>
                 <div>
-                    <input id="txtPassword" type="text" placeholder="Password" id="register__password"
-                        class="register__password | px-4 py-2 rounded w-full">
+                    <input type="text" placeholder="Password" id="register__password"
+                        class="login__input register__password txt-password | px-4 py-2 rounded w-full">
                 </div>
             </div>
 
             <div class="grid gap-4">
                 <button class="login__btn" id="register-btn" type="submit">Register</button>
-                <a href="./login.html" class="login__cac">
+                <a href="/" class="login__cac">
                     Login
                 </a>
             </div>
         </form>
     </main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
-        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./register.js" type="module"></script>
 </body>
 
 </html>

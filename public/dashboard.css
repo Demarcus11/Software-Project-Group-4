@@ -1,0 +1,396 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+  --main-bg: #edeef3;
+  --main-text: rgb(51 65 85);
+  --clr-primary-400: hsla(300, 100%, 25%, 1);
+  --clr-primary-400-hsl: 300, 100%, 25%;
+  --clr-nuetral-100: hsla(0, 100%, 100%, 0.95);
+  --ff-primary: "Poppins", sans-serif;
+}
+
+/* CSS Reset */
+
+/* makes sure padding and borders are calculated in the size of an element */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* remove default spacing and force children to inherit the font of their parents by default */
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+/* adds hanging punctuation when its the first or last character in text, currently not supported in Chrome as of 2024 */
+
+html {
+  hanging-punctuation: first last;
+}
+
+/* body should take at least the full height of the viewport */
+
+body {
+  min-height: 100svh;
+  /* svh assumes theres a address bar open on mobile and prevents layout shift when it disappears */
+}
+
+/* responsive images/videos */
+
+img,
+video,
+svg,
+picture {
+  display: block;
+  /* images/videos should be on their own line */
+  max-width: 100%;
+  /* width of images and videos should be at most be 100% of their container */
+}
+
+/* Make long headings display evenly across multiple lines by default */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+/* Gets rid of text orphans and limits text line length by default */
+
+p {
+  max-inline-size: 75ch;
+  /* similar to max-width except its a logical property, so it can adjust to different writing mode directions */
+  text-wrap: pretty;
+}
+
+/* eliminates scroll snap behavior when the user prefers reduced motion and adds some space above the section being scrolled to  */
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 3rem;
+    /* personal peference on how much space (usually 3-5 rem) */
+  }
+}
+
+/* Utility Classes */
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+/* General Styles */
+
+body {
+  font-family: var(--ff-primary);
+  background-color: var(--main-bg);
+  color: var(--main-text);
+}
+
+ul {
+  list-style: none;
+}
+
+/* Dashboard Styles */
+
+.project {
+  --header-height: 5rem;
+  --sidebar-width: 15rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-areas:
+    "sidebar header header"
+    "sidebar main   main"
+    "sidebar main   main";
+  grid-template-columns: minmax(0, var(--sidebar-width)) 1fr;
+  grid-template-rows: var(--header-height) 1fr;
+  min-height: 100vh;
+}
+
+.project__header {
+  grid-area: header;
+}
+
+.project__sidebar {
+  grid-area: sidebar;
+  background-color: var(--clr-primary-400);
+  color: var(--clr-nuetral-100);
+  position: relative;
+  padding: 1rem;
+}
+
+.project__main {
+  grid-area: main;
+}
+
+.project__content {
+  padding-top: 1rem;
+  overflow: auto;
+  height: 100vh;
+  padding-bottom: 5rem;
+}
+
+.project__section {
+  border-radius: 1rem;
+  padding: 1rem;
+  background-color: var(--clr-nuetral-100);
+}
+
+.project__header-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.project__input {
+  border: none;
+  outline: none;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+}
+
+.project__owner-name {
+  width: 20%;
+}
+
+i {
+  cursor: pointer;
+}
+
+.project-description {
+  width: 100%;
+}
+
+.project-risk-section {
+  margin-top: 1rem;
+}
+
+.project__main-subtitle {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+  margin-right: 0.5rem;
+  display: inline;
+}
+
+.amount {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+.project__project-risks {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.add-btn {
+  border-radius: 100vmax;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.edit-modal__form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.edit-modal {
+  position: relative;
+}
+
+.project__sidebar-members-item {
+  display: flex;
+  align-items: center;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  justify-content: space-between;
+}
+
+.project__sidebar-members-item:hover {
+  background-color: hsla(0, 100%, 100%, 0.2);
+}
+
+.project__main-subtitle,
+.project__main-title {
+  color: var(--clr-primary-400);
+}
+
+.project__section-card {
+  background-color: hsl(var(--clr-primary-400-hsl), 0.15);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.project__section-card-status {
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+[data-status="high"] {
+  background-color: hsla(0, 84.2%, 60.2%, 0.4);
+  color: hsla(0, 84.2%, 60.2%, 1);
+}
+
+[data-status="moderate"] {
+  background-color: hsla(40.6, 96.1%, 40.4%, 0.4);
+  color: hsla(40.6, 96.1%, 40.4%, 1);
+}
+
+[data-status="low"] {
+  background-color: hsla(142.1, 76.2%, 36.3%, 0.4);
+  color: hsla(142.1, 76.2%, 36.3%, 1);
+}
+
+.project__section-card-title {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+.project__section-card-text {
+  margin-top: 1rem;
+}
+
+.project__sidebar-members-submit {
+  display: grid;
+  place-content: center;
+  background-color: hsla(0, 100%, 100%, 0.2);
+}
+
+.project__sidebar-members-submit:hover {
+  filter: opacity(0.8);
+}
+
+.edit-modal {
+  margin: revert; /* so the modal doesn't get stuck to the top left of the screen */
+  padding: 1.5em;
+  max-width: 50ch;
+  border: 0;
+  box-shadow: 0 0 1em rgb(0 0 0 / 0.3);
+  border-radius: 0.5em;
+}
+
+.edit-modal-name {
+  outline: 1px solid black;
+  padding-inline: 0.25em;
+}
+
+.edit-modal-description {
+  display: block;
+  outline: 1px solid black;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.close-modal {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  border: none;
+  outline: none;
+}
+
+.save-btn {
+  background-color: var(--clr-primary-400);
+  color: var(--clr-nuetral-100);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding-block: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-btn {
+  display: block;
+  margin: 0 auto;
+  background-color: hsl(var(--clr-primary-400-hsl), 0.15);
+  aspect-ratio: 1;
+  width: 3rem;
+  display: grid;
+  place-items: center;
+}
+
+.outline {
+  border: 1px solid black;
+}
+
+.project__sidebar-title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.project__sidebar-members-submit {
+  width: 100%;
+  margin-top: 1rem;
+  padding-block: 0.5rem;
+  display: grid;
+  place-content: center;
+  background-color: hsla(0, 100%, 100%, 0.2);
+  border: none;
+  color: #fff;
+
+  i {
+    cursor: default;
+  }
+}
+
+.project__sidebar-members-submit:hover {
+  filter: opacity(0.8);
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  gap: 4rem;
+  bottom: 1rem;
+  background-color: transparent;
+}
+
+.log-out i {
+  background-color: transparent;
+}
+
+.project-functional-req-edit-btn {
+  cursor: pointer;
+}
+
+.functional-req-delete-btn {
+  cursor: pointer;
+}
+
+.project__section-card-title {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+}
+
+.project__section-card-text {
+  margin-top: 1rem;
+}

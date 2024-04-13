@@ -47,17 +47,23 @@ async function handleAddNonFunctionalReqFormSubmit() {
 
   const token = localStorage.getItem("token");
   try {
-    await axios.post(
+    const response = await fetch(
       `${API_BASE_ROUTE}/dashboard/${dashboardId}/non-functional-requirements`,
-      newNonFunctionalReq,
       {
+        method: "POST",
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
+        body: JSON.stringify(newNonFunctionalReq),
       }
     );
+
+    if (!response.ok) {
+      return;
+    }
   } catch (error) {
-    console.log(error.response);
+    console.log(error);
   }
   // re-render project risks
   await displayDashboardData();
@@ -120,7 +126,7 @@ async function handleEditNonFunctionalReqClick(e) {
         }
       }
     } catch (error) {
-      console.log(error.response);
+      console.log(error);
     }
   }
 }
@@ -134,18 +140,25 @@ async function handleProjectNonFunctionalReqFormSubmit() {
   };
 
   try {
-    await axios.patch(
+    const response = await fetch(
       `${API_BASE_ROUTE}/dashboard/${dashboardId}/non-functional-requirements/${projectNonFunctionalReqId}`,
-      newProjectNonFunctionalReq,
       {
+        method: "PATCH",
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
+        body: JSON.stringify(newProjectNonFunctionalReq),
       }
     );
+
+    if (!response.ok) {
+      return;
+    }
+
     await displayDashboardData();
   } catch (error) {
-    console.log(error.response);
+    console.log(error);
   }
 }
 
@@ -156,16 +169,22 @@ async function handleDeleteNonFunctionalReqClick(e) {
 
   const token = localStorage.getItem("token");
   try {
-    await axios.delete(
+    const response = await fetch(
       `${API_BASE_ROUTE}/dashboard/${dashboardId}/non-functional-requirements/${nonFunctionalReqId}`,
       {
+        method: "DELETE",
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
     );
+
+    if (!response.ok) {
+      return;
+    }
   } catch (error) {
-    console.log(error.response);
+    console.log(error);
   }
 
   await displayDashboardData();

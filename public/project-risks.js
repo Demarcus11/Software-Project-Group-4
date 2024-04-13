@@ -59,13 +59,20 @@ async function handleAddProjectRiskFormSubmit() {
 
   const token = localStorage.getItem("token");
   try {
-    await axios.post(`${API_BASE_ROUTE}/dashboard/${dashboardId}/project-risks`, newProjectRisk, {
+    const response = await fetch(`${API_BASE_ROUTE}/dashboard/${dashboardId}/project-risks`, {
+      method: "POST",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
+      body: JSON.stringify(newProjectRisk),
     });
+
+    if (!response.ok) {
+      return;
+    }
   } catch (error) {
-    console.log(error.response);
+    console.log(error);
   }
   // re-render project risks
   await displayDashboardData();
@@ -141,7 +148,7 @@ async function handleEditRiskClick(e) {
         }
       }
     } catch (error) {
-      console.log(error.response);
+      console.log(error);
     }
   }
 }
@@ -166,18 +173,25 @@ async function handleProjectRiskFormSubmit() {
   }
 
   try {
-    await axios.patch(
+    const response = await fetch(
       `${API_BASE_ROUTE}/dashboard/${dashboardId}/project-risks/${projectRiskId}`,
-      newProjectRisk,
       {
+        method: "PATCH",
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
+        body: JSON.stringify(newProjectRisk),
       }
     );
+
+    if (!response.ok) {
+      return;
+    }
+
     await displayDashboardData();
   } catch (error) {
-    console.log(error.response);
+    console.log(error);
   }
 }
 
@@ -188,16 +202,22 @@ async function handleDeleteProjectRiskClick(e) {
 
   const token = localStorage.getItem("token");
   try {
-    await axios.delete(
+    const response = await fetch(
       `${API_BASE_ROUTE}/dashboard/${dashboardId}/project-risks/${projectRiskId}`,
       {
+        method: "DELETE",
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
     );
+
+    if (!response.ok) {
+      return;
+    }
   } catch (error) {
-    console.log(error.response);
+    console.log(error);
   }
 
   await displayDashboardData();

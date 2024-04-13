@@ -81,6 +81,15 @@ p {
   }
 }
 
+/* Utility classes */
+.grid {
+  display: grid;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
 /* General Styles */
 
 body {
@@ -119,4 +128,38 @@ form {
 
 .login__cac {
   text-decoration: underline;
+}
+
+.login__form {
+  text-align: center;
+  display: grid;
+  gap: 2.5rem;
+}
+
+h1 {
+  font-weight: 700;
+  text-align: center;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.login__input {
+  padding-inline: 1rem;
+  padding-block: 0.5rem;
+  width: 100%;
+  border-radius: 0.25rem;
+  outline: none;
+  border: none;
+}
+
+.login__btn {
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.register__form {
+  text-align: center;
+  display: grid;
+  gap: 2.5rem;
 }
