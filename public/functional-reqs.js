@@ -28,6 +28,34 @@ const editFunctionalReqModalDOM = document.querySelector("#edit-project-function
 
 let projectFunctionalReqId = "";
 
+// Notifications
+function alertSuccess(message) {
+  Toastify({
+    text: message,
+    duration: 5000,
+    close: false,
+    gravity: "bottom",
+    style: {
+      background: "green",
+      color: "white",
+      textAlign: "center",
+    },
+  }).showToast();
+}
+
+function alertError(message) {
+  Toastify({
+    text: message,
+    duration: 5000,
+    close: false,
+    style: {
+      background: "red",
+      color: "white",
+      textAlign: "center",
+    },
+  }).showToast();
+}
+
 // CREATE
 async function handleAddFunctionalReqFormSubmit() {
   // make a new project risk obj
@@ -56,8 +84,11 @@ async function handleAddFunctionalReqFormSubmit() {
     if (!response.ok) {
       return;
     }
+
+    alertSuccess("Functional Requirement saved.");
   } catch (error) {
     console.log(error);
+    alertError("Error has occured");
   }
   // re-render project risks
   await displayDashboardData();
@@ -148,9 +179,12 @@ async function handleProjectFunctionalReqFormSubmit() {
       return;
     }
 
+    alertSuccess("Functional Requirement saved.");
+
     await displayDashboardData();
   } catch (error) {
     console.log(error);
+    alertError("Error has occured");
   }
 }
 
@@ -175,8 +209,11 @@ async function handleDeleteFunctionalReqClick(e) {
     if (!response.ok) {
       return;
     }
+
+    alertSuccess("Functional Requirement deleted.");
   } catch (error) {
     console.log(error);
+    alertError("Error has occured");
   }
 
   await displayDashboardData();

@@ -7,6 +7,34 @@ const projectTeamMemberFormDOM = document.querySelector("#add-project-team-membe
 const projectTeamMemberModalInputDOM = document.querySelector("#add-project-team-member-name");
 const addProjectTeamMemberCloseBtn = document.querySelector(".add-project-team-member-close-btn");
 
+// Notifications
+function alertSuccess(message) {
+  Toastify({
+    text: message,
+    duration: 5000,
+    close: false,
+    gravity: "bottom",
+    style: {
+      background: "green",
+      color: "white",
+      textAlign: "center",
+    },
+  }).showToast();
+}
+
+function alertError(message) {
+  Toastify({
+    text: message,
+    duration: 5000,
+    close: false,
+    style: {
+      background: "red",
+      color: "white",
+      textAlign: "center",
+    },
+  }).showToast();
+}
+
 // CREATE
 async function handleAddTeamMemberFormSubmit() {
   const token = localStorage.getItem("token");
@@ -27,8 +55,11 @@ async function handleAddTeamMemberFormSubmit() {
     if (!response.ok) {
       return;
     }
+
+    alertSuccess("Team member added.");
   } catch (error) {
     console.log(error);
+    alertError("Error has occured");
   }
 
   await displayDashboardData();
@@ -93,8 +124,11 @@ async function handleEditTeamMemberClick(e) {
         if (!response.ok) {
           return;
         }
+
+        alertSuccess("Team Member updated.");
       } catch (error) {
         console.log(error);
+        alertError("Error has occured");
       }
     });
   }
@@ -121,8 +155,11 @@ async function handleDeleteTeamMemberClick(e) {
     if (!response.ok) {
       return;
     }
+
+    alertSuccess("Team Member deleted.");
   } catch (error) {
     console.log(error);
+    alertError("Error has occured");
   }
 
   await displayDashboardData();

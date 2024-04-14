@@ -81,11 +81,20 @@ p {
   }
 }
 
+button {
+  border: 0;
+  outline: 0;
+}
+
 /* Utility Classes */
 
 .flex {
   display: flex;
   align-items: center;
+}
+
+.gap-4 {
+  gap: 1rem;
 }
 
 .gap-2 {
@@ -393,4 +402,41 @@ i {
 
 .project__section-card-text {
   margin-top: 1rem;
+}
+
+.team-member-input {
+  background-color: transparent;
+  width: 75%;
+  outline: 0;
+  border: none;
+  color: #fff;
+}
+
+.project__owner-name {
+  width: 10%;
+  outline: 0;
+  border: 0;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+button,
+.fa-plus {
+  cursor: pointer;
+}
+
+.project__section {
+  margin-top: 1rem;
+}
+
+.log-out {
+  background-color: transparent;
+  color: #fff;
+  position: absolute;
+  right: 1.5rem;
+  bottom: 1rem;
+}
+
+.project__section-card {
+  margin-block: 1rem;
 }

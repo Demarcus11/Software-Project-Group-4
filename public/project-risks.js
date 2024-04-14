@@ -30,6 +30,34 @@ const editProjectRiskModalDOM = document.querySelector("#edit-project-risk-modal
 
 let projectRiskId = "";
 
+// Notifications
+function alertSuccess(message) {
+  Toastify({
+    text: message,
+    duration: 5000,
+    close: false,
+    gravity: "bottom",
+    style: {
+      background: "green",
+      color: "white",
+      textAlign: "center",
+    },
+  }).showToast();
+}
+
+function alertError(message) {
+  Toastify({
+    text: message,
+    duration: 5000,
+    close: false,
+    style: {
+      background: "red",
+      color: "white",
+      textAlign: "center",
+    },
+  }).showToast();
+}
+
 // CREATE
 async function handleAddProjectRiskFormSubmit() {
   // make a new project risk obj
@@ -71,8 +99,11 @@ async function handleAddProjectRiskFormSubmit() {
     if (!response.ok) {
       return;
     }
+
+    alertSuccess("Project Risk added.");
   } catch (error) {
     console.log(error);
+    alertError("Error has occured");
   }
   // re-render project risks
   await displayDashboardData();
@@ -189,9 +220,11 @@ async function handleProjectRiskFormSubmit() {
       return;
     }
 
+    alertSuccess("Project risk updated.");
     await displayDashboardData();
   } catch (error) {
     console.log(error);
+    alertError("Error has occured");
   }
 }
 
@@ -216,8 +249,11 @@ async function handleDeleteProjectRiskClick(e) {
     if (!response.ok) {
       return;
     }
+
+    alertSuccess("Project Risk deleted.");
   } catch (error) {
     console.log(error);
+    alertError("Error has occured");
   }
 
   await displayDashboardData();

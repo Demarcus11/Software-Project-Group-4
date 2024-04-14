@@ -34,6 +34,34 @@ const addNonFunctionalReqModal = document.querySelector("#add-project-non-functi
 
 let projectNonFunctionalReqId = "";
 
+// Notifications
+function alertSuccess(message) {
+  Toastify({
+    text: message,
+    duration: 5000,
+    close: false,
+    gravity: "bottom",
+    style: {
+      background: "green",
+      color: "white",
+      textAlign: "center",
+    },
+  }).showToast();
+}
+
+function alertError(message) {
+  Toastify({
+    text: message,
+    duration: 5000,
+    close: false,
+    style: {
+      background: "red",
+      color: "white",
+      textAlign: "center",
+    },
+  }).showToast();
+}
+
 // CREATE
 async function handleAddNonFunctionalReqFormSubmit() {
   // make a new project risk obj
@@ -62,9 +90,12 @@ async function handleAddNonFunctionalReqFormSubmit() {
     if (!response.ok) {
       return;
     }
+    alertSuccess("Non-Functional requirement added.");
   } catch (error) {
     console.log(error);
+    alertError("Error has occured");
   }
+
   // re-render project risks
   await displayDashboardData();
 }
@@ -156,9 +187,11 @@ async function handleProjectNonFunctionalReqFormSubmit() {
       return;
     }
 
+    alertSuccess("Non-Functional requirement updated.");
     await displayDashboardData();
   } catch (error) {
     console.log(error);
+    alertError("Error has occured");
   }
 }
 
@@ -183,8 +216,11 @@ async function handleDeleteNonFunctionalReqClick(e) {
     if (!response.ok) {
       return;
     }
+
+    alertSuccess("Non-Functional requirement deleted.");
   } catch (error) {
     console.log(error);
+    alertError("Error has occured");
   }
 
   await displayDashboardData();

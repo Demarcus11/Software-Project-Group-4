@@ -60,13 +60,19 @@ async function handleProjectDescriptionChange() {
 
   const token = localStorage.getItem("token");
   try {
-    await axios.patch(`${API_BASE_ROUTE}/dashboard/${dashboardId}/description`, newDescription, {
+    const response = fetch(`${API_BASE_ROUTE}/dashboard/${dashboardId}/description`, {
+      method: "PATCH",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
+      body: JSON.stringify(newDescription),
     });
+
+    alertSuccess("Project description updated.");
   } catch (error) {
     console.log(error);
+    alertError("Error has occured");
   }
 }
 
@@ -99,6 +105,7 @@ async function handleProjectTitleChange() {
     alertSuccess("Title saved.");
   } catch (error) {
     console.log(error);
+    alertError("Error has occured");
   }
 }
 
@@ -121,8 +128,11 @@ async function handleProjectManagerChange() {
     if (!response.ok) {
       return;
     }
+
+    alertSuccess("Project Manager updated.");
   } catch (error) {
     console.log(error);
+    alertError("Error has occured");
   }
 }
 
