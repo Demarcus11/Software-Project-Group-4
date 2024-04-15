@@ -1,6 +1,7 @@
 const usernameInputDOM = document.querySelector(".login__username");
 const passwordInputDOM = document.querySelector(".login__password");
 const formDOM = document.querySelector(".login__form");
+const loginErrorDOM = document.querySelector(".login-error");
 
 localStorage.removeItem("username");
 localStorage.removeItem("token");
@@ -23,6 +24,10 @@ const login = async (e) => {
     });
 
     if (!response.ok) {
+      const errorData = await response.json();
+      const errorMessage = errorData.msg;
+      loginErrorDOM.textContent = errorMessage;
+      document.querySelector(".error-box").style.display = "flex";
       return;
     }
 

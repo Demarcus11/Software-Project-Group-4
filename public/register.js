@@ -1,6 +1,7 @@
 const usernameInputDOM = document.querySelector("#register__username");
 const passwordInputDOM = document.querySelector("#register__password");
 const registerFormDOM = document.querySelector("#register__form");
+const registerErrorDOM = document.querySelector(".register-error");
 
 const API_BASE_ROUTE = "/api/v1";
 
@@ -31,7 +32,12 @@ async function handleRegisterFormSubmit(e) {
       body: JSON.stringify(register),
     });
 
+    // guard clause, the fetch can be successful but the server can still respond with an error, fetch doesn't jump to the catch block if the server responds with an error but the fetch was successful
     if (!response.ok) {
+      const errorData = await response.json();
+      const errorMessage = errorData.msg;
+      registerErrorDOM.textContent = errorMessage;
+      document.querySelector(".error-box").style.display = "flex";
       return;
     }
     const data = await response.json();

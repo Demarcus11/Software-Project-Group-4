@@ -96,17 +96,22 @@ body {
   font-family: var(--ff-primary);
   background-color: var(--main-bg);
   color: var(--main-text);
-  min-height: 100vh;
+  min-height: 100svh;
 }
 
 .login {
   display: grid;
   place-content: center;
-  grid-template-columns: 1fr 1fr;
   gap: 5rem;
-  margin-top: 10rem;
   width: min(100% - 3rem, 70rem);
   margin-inline: auto;
+}
+
+@media (min-width: 60em) {
+  .login {
+    grid-template-columns: 1fr 1fr;
+    margin-top: 10rem;
+  }
 }
 
 form {
@@ -162,4 +167,21 @@ h1 {
   text-align: center;
   display: grid;
   gap: 2.5rem;
+}
+
+.error {
+  margin-top: 1rem;
+  color: #ff0033;
+}
+
+.error-box {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ff0033;
+  margin-inline: auto;
+}
+
+.fa-circle-exclamation {
+  margin-top: 15px;
 }

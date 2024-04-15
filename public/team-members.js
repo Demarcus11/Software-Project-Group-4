@@ -6,6 +6,7 @@ const projectTeamMemberModalDOM = document.querySelector("#add-project-team-memb
 const projectTeamMemberFormDOM = document.querySelector("#add-project-team-member-form");
 const projectTeamMemberModalInputDOM = document.querySelector("#add-project-team-member-name");
 const addProjectTeamMemberCloseBtn = document.querySelector(".add-project-team-member-close-btn");
+const addProjectTeamMemberBtnMobile = document.querySelector("#add-team-members-btn-mobile");
 
 // Notifications
 function alertSuccess(message) {
@@ -167,6 +168,9 @@ async function handleDeleteTeamMemberClick(e) {
 
 // Event listeners
 projectTeamMemberAddBtn.addEventListener("click", () => {
+  projectTeamMemberModalDOM.showModal();
+});
+addProjectTeamMemberBtnMobile.addEventListener("click", () => {
   projectTeamMemberModalDOM.showModal();
 });
 projectTeamMemberFormDOM.addEventListener("submit", handleAddTeamMemberFormSubmit);
