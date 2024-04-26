@@ -201,6 +201,15 @@ async function handleDeleteNonFunctionalReqClick(e) {
   const nonFunctionalReqId = nonFunctionalReqElement.dataset.id;
 
   const token = localStorage.getItem("token");
+
+  const confirm = window.confirm(
+    `Are you sure you want to delete Non-functional Requirement: ${
+      nonFunctionalReqElement.querySelector(".project__section-card-title").textContent
+    }`
+  );
+
+  if (!confirm) return;
+
   try {
     const response = await fetch(
       `${API_BASE_ROUTE}/dashboard/${dashboardId}/non-functional-requirements/${nonFunctionalReqId}`,
