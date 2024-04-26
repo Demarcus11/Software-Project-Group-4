@@ -20,6 +20,44 @@
 </head>
 
 <body>
+    <main class="login | two-columns">
+        <!-- Left Side -->
+        <div>
+            <p class="title">Project Management System</p>
+            <img src="./images/illustration-mockups.svg" alt="">
+        </div>
+
+        <!-- Right Side -->
+        <div>
+            <p class="auth__form-title">Register</p>
+            <form id="register__form" class="register__form login__form">
+                <div class="auth__form" id="register__form">
+                    <div>
+                        <label for="">Username</label>
+                        <input class="login__input register__username" type="text" id="register__username"
+                            placeholder="Enter username...">
+                    </div>
+
+                    <div>
+                        <label for="">Password</label>
+                        <input class="login__input register__password txt-password" id="register__password" type="text"
+                            placeholder="Enter password...">
+
+                        <div class="error-box">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                            <p class="error register-error"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" id="register-btn" class="login__btn auth__submit">Register</button>
+                    <p class="register">Have an account? <a href="/">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </main>
+    <!--     
     <main class="login">
         <div>
             <img src="./images/login.png" class="login__img" alt="">
@@ -50,7 +88,7 @@
                 </a>
             </div>
         </form>
-    </main>
+    </main> -->
 
     <script src="./register.js" type="module"></script>
 </body>

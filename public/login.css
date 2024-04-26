@@ -3,8 +3,9 @@
 :root {
   --main-bg: #edeef3;
   --main-text: rgb(51 65 85);
-  --clr-primary-400: hsla(300, 100%, 25%, 1);
+  --clr-primary-400: hsla(257, 40%, 49%);
   --clr-primary-400-hsl: 300, 100%, 25%;
+  --clr-primary-300: hsl(300, 69%, 71%);
   --clr-nuetral-100: hsla(0, 100%, 100%, 0.95);
   --ff-primary: "Poppins", sans-serif;
 }
@@ -82,13 +83,13 @@ p {
 }
 
 /* Utility classes */
-.grid {
+/* .grid {
   display: grid;
 }
 
 .gap-4 {
   gap: 1rem;
-}
+} */
 
 /* General Styles */
 
@@ -99,7 +100,7 @@ body {
   min-height: 100svh;
 }
 
-.login {
+/* .login {
   display: grid;
   place-content: center;
   gap: 5rem;
@@ -184,4 +185,105 @@ h1 {
 
 .fa-circle-exclamation {
   margin-top: 15px;
+} */
+
+/* New Login */
+
+.login {
+  color: var(--clr-nuetral-100);
+  background-color: var(--clr-primary-400);
+  background-image: url("./images/bg-desktop.svg");
+  background-repeat: no-repeat;
+  padding: 1rem;
+}
+
+.two-columns {
+  display: grid;
+  gap: 1rem;
+  place-content: center;
+  min-height: 100vh;
+}
+
+@media (min-width: 64em) {
+  .two-columns {
+    grid-template-columns: minmax(2em, 1fr) minmax(0, 35rem) minmax(0, 35rem) minmax(2em, 1fr);
+    gap: 5rem;
+  }
+  .two-columns > *:first-child {
+    grid-column: 2 / span 1;
+  }
+  .two-columns > *:last-child {
+    grid-column: 3 / span 1;
+  }
+}
+
+.auth__form {
+  display: grid;
+  gap: 2rem;
+}
+
+.auth__form > div {
+  display: grid;
+  place-items: start;
+}
+
+.auth__form-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+input {
+  width: 100%;
+  padding: 0.3rem 1rem;
+  margin-top: 0.5rem;
+}
+input:focus {
+  outline: 1px solid var(--clr-primary-300);
+}
+
+.auth__submit {
+  width: 100%;
+  border-radius: 5px;
+  background-color: var(--clr-primary-300);
+  color: var(--clr-nuetral-100);
+  border: 0;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  margin-top: 2.5rem;
+}
+.auth__submit:hover {
+  filter: brightness(0.75);
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.error {
+  color: #ffcccb;
+}
+
+.error-box {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ffcccb;
+  margin-inline: auto;
+  margin-top: 1.5rem;
+}
+
+.register {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+a {
+  color: var(--clr-nuetral-100);
+}
+a:hover {
+  text-decoration: none;
 }

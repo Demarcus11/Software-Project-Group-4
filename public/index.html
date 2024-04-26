@@ -22,7 +22,44 @@
 </head>
 
 <body>
-    <main class="login">
+    <main class="login | two-columns">
+        <!-- Left Side -->
+        <div>
+            <p class="title">Project Management System</p>
+            <img src="./images/illustration-mockups.svg" alt="">
+        </div>
+
+        <!-- Right Side -->
+        <div>
+            <p class="auth__form-title">Login</p>
+            <form id="login__form" class="login__form">
+                <div class="auth__form">
+                    <div>
+                        <label for="">Username</label>
+                        <input class="login__input login__username" type="text" placeholder="Enter username...">
+                    </div>
+
+                    <div>
+                        <label for="">Password</label>
+                        <input id="txtPassword" class="login__input login__password" type="text"
+                            placeholder="Enter password...">
+
+                        <div class="error-box">
+                            <i class="fa-solid fa-circle-exclamation"></i>
+                            <p class="error login-error"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" class="login__btn auth__submit">Login</button>
+                    <p class="register">Don't have an account? <a href="./register.html">Register</a></p>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- <main class="login">
         <div>
             <img src="./images/login.png" class="login__img" alt="">
         </div>
@@ -52,7 +89,7 @@
                 </a>
             </div>
         </form>
-    </main>
+    </main> -->
 
 
     <script src="./login.js" type="module"></script>
