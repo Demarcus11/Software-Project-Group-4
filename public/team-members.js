@@ -141,6 +141,13 @@ async function handleDeleteTeamMemberClick(e) {
   const teamMemberId = teamMemberElement.dataset.id;
 
   const token = localStorage.getItem("token");
+
+  const confirm = window.confirm(
+    `Are you sure you want to delete team member: ${teamMemberElement.querySelector("input").value}`
+  );
+
+  if (!confirm) return;
+
   try {
     const response = await fetch(
       `${API_BASE_ROUTE}/dashboard/${dashboardId}/team-members/${teamMemberId}`,
