@@ -194,6 +194,15 @@ async function handleDeleteFunctionalReqClick(e) {
   const functionalReqId = functionalReqElement.dataset.id;
 
   const token = localStorage.getItem("token");
+
+  const confirm = window.confirm(
+    `Are you sure you want to delete Functional Requirement: ${
+      functionalReqElement.querySelector(".project__section-card-title").textContent
+    }`
+  );
+
+  if (!confirm) return;
+
   try {
     const response = await fetch(
       `${API_BASE_ROUTE}/dashboard/${dashboardId}/functional-requirements/${functionalReqId}`,
