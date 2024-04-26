@@ -234,6 +234,15 @@ async function handleDeleteProjectRiskClick(e) {
   const projectRiskId = projectRiskElement.dataset.id;
 
   const token = localStorage.getItem("token");
+
+  const confirm = window.confirm(
+    `Are you sure you want to delete project risk: ${
+      projectRiskElement.querySelector(".project__section-card-title").textContent
+    }`
+  );
+
+  if (!confirm) return;
+
   try {
     const response = await fetch(
       `${API_BASE_ROUTE}/dashboard/${dashboardId}/project-risks/${projectRiskId}`,
