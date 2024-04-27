@@ -287,3 +287,21 @@ a {
 a:hover {
   text-decoration: none;
 }
+
+.input-box {
+  position: relative;
+  width: 100%;
+}
+
+.fa-user,
+.fa-lock {
+  position: absolute;
+  left: 1rem;
+  top: 58%;
+  transform: translate(-50%, -50%);
+  color: var(--clr-primary-400);
+}
+
+.login__input {
+  padding-left: 1.8rem;
+}
