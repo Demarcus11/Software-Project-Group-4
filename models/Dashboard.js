@@ -9,7 +9,7 @@ const DashboardSchema = new mongoose.Schema(
     },
     projectManager: {
       type: String,
-      default: "John Doe",
+      default: "Name",
       trim: true,
     },
     description: {
